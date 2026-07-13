@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>NaCl v2-Test (selbst kompilierte .mind)</title>
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    /* Hinweis-Overlay, bis die Karte erkannt ist */
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(20,20,26,0.82); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>NaCl-Karte</strong> (v2-Test) in die Kamera — das Gitter erscheint darauf.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="nacl" src="./nacl_gitter.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Das Modell sitzt im Zentrum der Karte. scale/rotation/position sind
+         Startwerte — nach dem ersten Test am Handy ggf. leicht anpassen:
+           - scale hoch/runter, bis das Gitter zur Kartengröße passt
+           - rotation="-90 0 0" probieren, falls das Modell flach in der Karte liegt
+             statt aufrecht darauf zu stehen -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#nacl"
+        position="0 0 0.6"
+        rotation="0 0 0"
+        scale="2.1 2.1 2.1"
+        animation="property: rotation; to: 0 360 0; dur: 12000; easing: linear; loop: true">
+      </a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const scene = document.querySelector('a-scene');
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>
