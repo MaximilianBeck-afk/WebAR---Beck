@@ -1,0 +1,20 @@
+# Nur Laufzeit-Assets werden gehostet. Entwürfe, Prompts, Zwischenstände und
+# Roh-Intermediates bleiben lokal (der User behält alle Entwürfe auf der Platte).
+*/entwuerfe/
+*/prompts/
+*/artwork/
+*/sprites/sprite-2d-frames/
+*/sprites/sprite-3d-raw.glb
+*/sprites/*.gif
+*/render_*.py
+*/build_*.py
+*/*.log
+*/BRIEF.md
+*/PROGRESS.md
+*/README.md
+*/WERKZEUG-CHECK.md
+*/karte-quelle.png
+*/karte-quelle.pdf
+BRIEFING.md
+PROGRESS.md
+_jury/

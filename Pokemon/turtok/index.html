@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Turtok — AR auf der Karte</title>
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    /* Hinweis-Overlay, bis die Karte erkannt ist */
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(9,19,36,0.85); color: #eaf6fa;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+      border: 1px solid rgba(56,212,226,0.55);
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Turtok-Karte</strong> in die Kamera — der Hydro-Druckpanzer erscheint darauf.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="turtok" src="./sprites/sprite-3d.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Turtok sitzt im Zentrum der Karte. scale/rotation/position sind
+         Startwerte (glb-bounds: 1.56x1.89x1.61 Einheiten, kompakt → Scale ~0.05):
+           - scale hoch/runter, bis Turtok zur Kartengröße passt
+           - das glb enthält keinen Animations-Clip → Drehung via animation=
+             (Y-Spin). Falls Turtok flach liegt statt aufrecht zu stehen:
+             rotation="-90 0 0" probieren. -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#turtok"
+        position="0 -0.15 0.2"
+        rotation="0 0 0"
+        scale="0.055 0.055 0.055"
+        animation="property: rotation; to: 0 360 0; dur: 14000; easing: linear; loop: true">
+      </a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

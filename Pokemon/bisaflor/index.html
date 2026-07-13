@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Bisaflor — AR auf der Karte</title>
+  <!-- A-Frame + MindAR Bild-Tracking + aframe-extras (animation-mixer für glb-Clips) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(16,22,14,0.82); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Bisaflor-Karte</strong> in die Kamera — Bisaflor erblüht darauf in 3D.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="bisaflor" src="./sprites/sprite-3d.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Das Modell sitzt im Zentrum der Karte. scale/position/rotation sind Startwerte
+         (Scale-Startwert via glb-bounds.py bestimmt) — am Gerät ggf. leicht nachziehen.
+         animation-mixer spielt den eingebetteten Blender-Clip (pulsierende Blüte/Atem);
+         zusätzlich eine langsame Y-Rotation als Präsentations-Drehung. -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#bisaflor"
+        position="0 0 0"
+        rotation="0 0 0"
+        scale="0.06 0.06 0.06"
+        animation-mixer="loop: repeat"
+        animation="property: rotation; to: 0 360 0; dur: 16000; easing: linear; loop: true">
+      </a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

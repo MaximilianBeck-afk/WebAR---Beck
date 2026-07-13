@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Glurak — AR auf der Karte</title>
+  <!-- A-Frame + MindAR Bild-Tracking + aframe-extras (animation-mixer, falls glb-Clip) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <!-- Flipbook-Komponente fuer die 2D-Sprite-Variante (Spritesheet-Textur-Offset pro Frame).
+       Wird nur genutzt, wenn man unten auf den 2D-Sprite umstellt (siehe Kommentar). -->
+  <script>
+    AFRAME.registerComponent('flipbook', {
+      schema: {
+        cols:   { type: 'int',   default: 4 },
+        rows:   { type: 'int',   default: 2 },
+        frames: { type: 'int',   default: 8 },
+        fps:    { type: 'number', default: 9 }
+      },
+      init: function () {
+        this.frame = 0; this.t = 0;
+        const apply = () => {
+          const mesh = this.el.getObject3D('mesh');
+          if (!mesh || !mesh.material || !mesh.material.map) { return false; }
+          this.tex = mesh.material.map;
+          this.tex.wrapS = this.tex.wrapT = THREE.RepeatWrapping;
+          this.tex.repeat.set(1 / this.data.cols, 1 / this.data.rows);
+          this.tex.needsUpdate = true;
+          return true;
+        };
+        if (!apply()) { this.el.addEventListener('materialtextureloaded', apply); this.el.addEventListener('model-loaded', apply); }
+      },
+      tick: function (time, dt) {
+        if (!this.tex) { return; }
+        this.t += dt;
+        const step = 1000 / this.data.fps;
+        if (this.t >= step) {
+          this.t -= step;
+          this.frame = (this.frame + 1) % this.data.frames;
+          const cx = this.frame % this.data.cols;
+          const cy = Math.floor(this.frame / this.data.cols);
+          // v-Achse gespiegelt (Textur-Ursprung unten links)
+          this.tex.offset.set(cx / this.data.cols, 1 - (cy + 1) / this.data.rows);
+        }
+      }
+    });
+  </script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(20,12,14,0.84); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+      border: 1px solid rgba(240,178,60,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Glurak-Karte</strong> in die Kamera — der Drache erscheint lodernd in 3D.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="glurak" src="./sprites/sprite-3d.glb"></a-asset-item>
+      <!-- 2D-Flipbook-Spritesheet (Alternative, siehe unten) -->
+      <img id="glurak2d" src="./sprites/sprite-2d-sheet.png" crossorigin="anonymous">
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Der Drache steht aufrecht mittig auf der Karte. scale/position/rotation sind
+         Startwerte aus glb-bounds.py — am Handy ggf. leicht nachziehen:
+           - scale hoch/runter, bis der Drache zur Kartengroesse passt
+           - rotation-Startwert 0 0 0 (kompaktes, aufrechtes Modell). Falls das Modell
+             flach in der Karte liegt statt aufrecht darauf zu stehen: rotation="-90 0 0". -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <!-- Wrapper dreht sich langsam (bewegter 3D-Sprite = Minimalloesung laut Kontrakt,
+           da das image-to-3D-Mesh keinen eigenen Animationsclip mitbringt).
+           Inneres Entity macht ein sanftes Auf/Ab (Schweben/„lodern"). -->
+      <a-entity
+        animation="property: rotation; to: 0 360 0; dur: 14000; easing: linear; loop: true">
+        <a-gltf-model
+          src="#glurak"
+          position="0 0 0.03"
+          rotation="0 0 0"
+          scale="0.055 0.055 0.055"
+          animation="property: position; to: 0 0.04 0.03; dir: alternate; dur: 1600; easing: easeInOutSine; loop: true">
+        </a-gltf-model>
+      </a-entity>
+      <!-- warmes Feuer-Licht, damit die Schuppen glaenzen -->
+      <a-light type="point" color="#FF8A28" intensity="0.9" position="0.3 0.4 0.6"></a-light>
+      <a-light type="ambient" color="#FFE0B0" intensity="0.6"></a-light>
+
+      <!-- === ALTERNATIVE: 2D-Flipbook-Sprite ===================================
+           Zum Umschalten den 3D-Block oben auskommentieren und diesen aktivieren.
+           Plane-Proportion = Frame-Aspekt 480:720 (2:3). transparent:true fuer Alpha.
+      <a-plane
+        material="src: #glurak2d; transparent: true; alphaTest: 0.05; shader: flat; side: double"
+        flipbook="cols: 4; rows: 2; frames: 8; fps: 9"
+        position="0 0 0.02"
+        rotation="0 0 0"
+        width="0.5" height="0.75"
+        animation="property: position; to: 0 0.03 0.02; dir: alternate; dur: 1500; easing: easeInOutSine; loop: true">
+      </a-plane>
+      ======================================================================= -->
+    </a-entity>
+  </a-scene>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>
