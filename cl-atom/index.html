@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Chlor-Atom (Bohr-Modell) — AR auf der Karte</title>
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <!-- aframe-extras liefert die animation-mixer-Komponente, die die glTF-Animation
+       (kreisende Elektronen) abspielt. Version 7.5.4 ist zu A-Frame 1.5.0 kompatibel. -->
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    /* Hinweis-Overlay, bis die Karte erkannt ist */
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(20,20,26,0.82); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Chlor-Karte</strong> in die Kamera — das Atom erscheint darauf.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="cl" src="./cl.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Das Bohr-Modell ist planar (Scheibe in der XY-Ebene, y-up) und liegt damit
+         parallel zur Karte, d. h. man sieht es face-on (Elektronen kreisen sichtbar).
+         Startwerte (am Gerät nachjustieren):
+           - scale="4 4 4": Modell ist ~0.15 m breit; MindAR normiert die Kartenhöhe
+             auf ~1 Einheit, 4x füllt grob 60 % der Kartenbreite. Bei zu klein/groß anpassen.
+           - position="0 0 0.4": hebt die Scheibe ~0.4 Einheiten über die Karte, damit sie
+             nicht mit dem Kartenbild z-fightet und frei über der Karte schwebt.
+           - rotation="0 0 0": Scheibe face-on. Falls das Atom lieber aufrecht/gekippt
+             über der Karte stehen soll, rotation="-90 0 0" bzw. Zwischenwerte probieren.
+         animation-mixer spielt die eingebettete glTF-Animation (kreisende Elektronen)
+         automatisch und in Schleife ab. -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#cl"
+        position="0 0 0.3"
+        rotation="-90 0 0"
+        scale="0.65 0.65 0.65"
+        animation-mixer="clip: *; loop: repeat; timeScale: 1">
+      </a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

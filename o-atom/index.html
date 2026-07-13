@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Sauerstoff-Atom (O) — AR auf der Karte</title>
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <!-- aframe-extras liefert die Komponente animation-mixer, die die im glb
+       gebackene glTF-Animation abspielt (die Elektronen kreisen um den Kern).
+       7.5.4 ist auf A-Frame 1.5.x abgestimmt. -->
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    /* Hinweis-Overlay, bis die Karte erkannt ist */
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(20,20,26,0.82); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Sauerstoff-Karte</strong> in die Kamera — das Atommodell erscheint darauf.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="oatom" src="./o.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         START-WERTE (am Handy nachjustieren):
+           - Das Modell ist eine flache Scheibe (Bahnebene in XZ, y ist die duenne
+             Achse). rotation="-90 0 0" legt die Scheibe FLACH auf die Karte, sodass
+             die Elektronen in der Kartenebene kreisen (wie im Kartenbild).
+             Liegt/steht es falsch: rotation-X zwischen -90 und 0 probieren.
+           - scale 1.2: o.glb ist ~2.1x breiter als das NaCl-Gitter (0.095 vs 0.045
+             Einheiten), darum ~1.0-1.2 statt NaCl-2.1, damit die Bahnen die Karte
+             nicht sprengen. Bei Bedarf hoch/runter.
+           - position z=0.3: hebt das Atom leicht ueber die Karte (Richtung Kamera).
+         animation-mixer spielt die glb-Animation "Scene" automatisch in Endlosschleife. -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#oatom"
+        position="0 0 0.3"
+        rotation="-90 0 0"
+        scale="1.2 1.2 1.2"
+        animation-mixer="clip: *; loop: repeat; timeScale: 1">
+      </a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>
