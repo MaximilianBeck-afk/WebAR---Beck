@@ -13,8 +13,8 @@ Läuft über **GitHub Pages** (HTTPS ist Pflicht, weil die Kamera nur auf sicher
 ## Live-Adresse (nach Pages-Aktivierung)
 
 ```
-https://maximilianbeck-afk.github.io/webar/
-https://maximilianbeck-afk.github.io/webar/nacl-gitter/
+https://maximilianbeck-afk.github.io/WebAR---Beck/
+https://maximilianbeck-afk.github.io/WebAR---Beck/nacl-gitter/
 ```
 
 ## Neues Modell hinzufügen
