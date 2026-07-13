@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>NaCl-Ionengitter — 3D & AR</title>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
+  <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+      background: #f4f4f6; color: #16161a;
+      display: flex; flex-direction: column; min-height: 100vh;
+    }
+    @media (prefers-color-scheme: dark) { body { background: #0e0e11; color: #f2f2f4; } }
+    header { padding: 1.1rem 1.2rem 0.4rem; }
+    h1 { font-size: 1.35rem; margin: 0 0 0.15rem; letter-spacing: -0.01em; }
+    header p { margin: 0; font-size: 0.9rem; opacity: 0.7; }
+    main { flex: 1; padding: 0.6rem 1.2rem 1rem; }
+    model-viewer {
+      width: 100%; height: 62vh; min-height: 340px;
+      background: #ffffff; border-radius: 16px;
+      --poster-color: transparent;
+    }
+    @media (prefers-color-scheme: dark) { model-viewer { background: #17171c; } }
+    .hint {
+      margin: 0.9rem auto 0; max-width: 40rem;
+      font-size: 0.92rem; line-height: 1.5; opacity: 0.85;
+    }
+    .ar-badge {
+      display: inline-block; padding: 0.15em 0.5em; border-radius: 6px;
+      background: #4f46e5; color: #fff; font-size: 0.8rem; font-weight: 600;
+    }
+    #ar-button {
+      position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+      background: #4f46e5; color: #fff; border: none; border-radius: 999px;
+      padding: 0.7em 1.4em; font-size: 0.95rem; font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.2); cursor: pointer;
+    }
+    footer { padding: 0.6rem 1.2rem 1.1rem; font-size: 0.78rem; opacity: 0.55; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>NaCl-Ionengitter</h1>
+    <p>Kochsalz-Struktur — zum Drehen, Zoomen und in <span class="ar-badge">AR</span> ansehen</p>
+  </header>
+  <main>
+    <model-viewer
+      src="nacl_gitter.glb"
+      ios-src="nacl_gitter.usdz"
+      alt="3D-Modell des NaCl-Ionengitters"
+      ar
+      ar-modes="webxr scene-viewer quick-look"
+      ar-scale="auto"
+      camera-controls
+      auto-rotate
+      auto-rotate-delay="0"
+      rotation-per-second="18deg"
+      shadow-intensity="0.9"
+      exposure="1.0"
+      touch-action="pan-y">
+      <button id="ar-button" slot="ar-button">In AR ansehen</button>
+    </model-viewer>
+
+    <p class="hint">
+      <strong>Auf dem Handy:</strong> Tippe auf <em>„In AR ansehen"</em> und richte die Kamera auf
+      eine freie Fläche (Tisch, Boden). Das Gitter erscheint live im Raum und lässt sich umlaufen.
+      <br><strong>Am Rechner:</strong> mit der Maus drehen und zoomen.
+    </p>
+  </main>
+  <footer>
+    Na⁺ (violett) · Cl⁻ (grün) — flächenzentriertes Ionengitter · erstellt mit Blender (Skill blender-visualisierung)
+  </footer>
+</body>
+</html>
