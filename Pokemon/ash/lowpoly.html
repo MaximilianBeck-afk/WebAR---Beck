@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Ash (Trainer) — AR auf der Karte (Retro-Low-Poly-Variante)</title>
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(14,18,44,0.85); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+      border: 1px solid rgba(245,205,60,0.6);
+    }
+  </style>
+  <script>
+    // Idle-Animation für das Low-Poly-Modell rein in A-Frame (kein Baked-Clip nötig):
+    // sanftes Auf/Ab (Bob) + minimales Atmen (Scale-Puls). Läuft dauerhaft, sobald das
+    // Modell geladen ist. Werte bewusst klein -> ruhiges "steht da und atmet".
+    AFRAME.registerComponent('idle-bob', {
+      schema: {
+        bob:    { default: 0.02 },   // vertikale Bob-Amplitude (Einheiten)
+        breathe:{ default: 0.02 },   // Atem-Amplitude (Anteil der Grund-Scale)
+        speed:  { default: 2200 }    // ms pro voller Schwingung
+      },
+      init: function () {
+        this.t = 0;
+        this.baseY = this.el.object3D.position.y;
+        this.baseS = this.el.object3D.scale.x;   // uniform angenommen
+      },
+      tick: function (time, dt) {
+        if (!dt) return;
+        this.t += dt;
+        const w = (2 * Math.PI) / this.data.speed;
+        const s = Math.sin(this.t * w);
+        // Bob: y hebt/senkt; Atmen leicht phasenversetzt (cos) -> lebendiger
+        this.el.object3D.position.y = this.baseY + s * this.data.bob;
+        const c = Math.cos(this.t * w);
+        const sc = this.baseS * (1 + c * this.data.breathe);
+        this.el.object3D.scale.set(sc, sc, sc);
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Ash-Karte</strong> in die Kamera — der Trainer erscheint als <strong>Retro-Low-Poly-3D-Modell</strong> darauf (GameCube-Ära, atmet/bobbt).</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <!-- Retro-Low-Poly-Trainer (GameCube-Ära), via Higgsfield multi_image_to_3d aus lowpoly-retro-basis.png -->
+      <a-asset-item id="ash-retro" src="./sprites/sprite-3d-retro.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- Etwas Umgebungslicht, damit das flach schattierte Low-Poly-Modell lesbar bleibt -->
+    <a-entity light="type: ambient; intensity: 0.9"></a-entity>
+    <a-entity light="type: directional; intensity: 0.7" position="1 2 1"></a-entity>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Das Modell steht aufrecht auf der Karte und macht eine ruhige Idle-Bewegung.
+         rotation/scale/position sind Startwerte — am Handy ggf. anpassen:
+           - rotation="-90 0 0" <-> "90 0 0" umschalten, falls das Modell flach in der
+             Karte liegt statt aufrecht darauf zu stehen (glTF ist y-up; MindAR-Karte liegt
+             in der XY-Ebene, +Z zeigt aus der Karte heraus).
+           - scale hoch/runter, bis der Trainer zur Kartengroesse passt (Modell ist ~1.9
+             Einheiten hoch -> Start-Scale ~0.05). -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-gltf-model
+        src="#ash-retro"
+        idle-bob="bob: 0.02; breathe: 0.02; speed: 2200"
+        position="0 0 0.02"
+        rotation="-90 0 0"
+        scale="0.05 0.05 0.05">
+      </a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

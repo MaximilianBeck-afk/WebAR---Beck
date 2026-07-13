@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Glurak — AR (Retro-Low-Poly-Variante)</title>
+  <!-- ===================================================================================
+       VERGLEICHSVARIANTE: Retro-Low-Poly-Sprite (GameCube-Ära-Look, flach schattiert).
+       Identisch zu index.html, aber Sprite = sprites/sprite-3d-retro.glb, plus ein
+       ausgepraegter Spiel-Idle (Atmen via Scale-Puls + Wippen/Bob + langsame Y-Rotation).
+       Gleiche targets.mind, gleiche Karte. Die aktive Seite ist weiterhin index.html.
+       ==================================================================================== -->
+  <!-- A-Frame + MindAR Bild-Tracking + aframe-extras (animation-mixer, falls glb-Clip) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.4/dist/aframe-extras.min.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(20,12,14,0.84); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+      border: 1px solid rgba(240,178,60,0.5);
+    }
+    #hinweis .tag { color: #7fe7dd; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Glurak-Karte</strong> in die Kamera — <span class="tag">Retro-Low-Poly-Variante</span> (GameCube-Ära).</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="glurakRetro" src="./sprites/sprite-3d-retro.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind (gleich wie index.html).
+         Startwerte aus glb-bounds.py (Retro-Mesh 1.43×1.90×1.30, aufrecht/nicht-planar):
+         scale 0.055, rotation 0 0 0, position 0 0 0.03 — am Handy ggf. leicht nachziehen.
+         Falls das Modell flach in der Karte liegt statt aufrecht: rotation="-90 0 0". -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <!-- Aeusserer Wrapper: langsame Ganzkoerper-Y-Rotation (Turntable-Idle). -->
+      <a-entity
+        animation__spin="property: rotation; to: 0 360 0; dur: 16000; easing: linear; loop: true">
+        <!-- Spiel-Idle: (1) Bob = sanftes Auf/Ab (Wippen), (2) Breathe = kleiner Scale-Puls
+             (Atmen). Beide alternate+loop, leicht unterschiedliche Dauer, damit die Bewegung
+             organisch „lebt" statt synchron zu pulsieren. -->
+        <a-gltf-model
+          src="#glurakRetro"
+          position="0 0 0.03"
+          rotation="0 0 0"
+          scale="0.055 0.055 0.055"
+          animation__bob="property: position; from: 0 0 0.03; to: 0 0.045 0.03; dir: alternate; dur: 1700; easing: easeInOutSine; loop: true"
+          animation__breathe="property: scale; from: 0.055 0.055 0.055; to: 0.0575 0.0535 0.0575; dir: alternate; dur: 2100; easing: easeInOutSine; loop: true">
+        </a-gltf-model>
+      </a-entity>
+      <!-- warmes Feuer-Licht, damit die facettierten Flaechen plastisch wirken -->
+      <a-light type="point" color="#FF8A28" intensity="0.9" position="0.3 0.4 0.6"></a-light>
+      <a-light type="ambient" color="#FFE0B0" intensity="0.6"></a-light>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

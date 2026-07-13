@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Turtok — AR auf der Karte (Retro-Low-Poly-Variante)</title>
+  <!-- ================================================================
+       RETRO-LOW-POLY-VARIANTE (Runde C).
+       Gleiche Karte / gleiche targets.mind wie index.html, aber der
+       Sprite ist das GameCube-Ära-Low-Poly-Turtok-Mesh
+       (sprites/sprite-3d-retro.glb, eigenes Fan-Art „im Stil von",
+       kein geripptes Original). Idle-Animation komplett in A-Frame:
+       Bob (Auf/Ab) + Scale-Puls (Atmen) + langsame Y-Rotation.
+       Die aktive Seite ist index.html — dies ist die Vergleichsseite.
+       ================================================================ -->
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    /* Hinweis-Overlay, bis die Karte erkannt ist */
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(9,19,36,0.85); color: #eaf6fa;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+      border: 1px solid rgba(56,212,226,0.55);
+    }
+    /* kleines Ecken-Label „Retro-Low-Poly-Variante" */
+    #variante {
+      position: fixed; left: 12px; top: 12px; z-index: 6;
+      background: rgba(9,19,36,0.78); color: #ffcf6a;
+      padding: 0.35em 0.7em; border-radius: 8px; font-size: 0.78rem;
+      letter-spacing: 0.04em; pointer-events: none;
+      border: 1px solid rgba(255,207,106,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div id="variante">Retro-Low-Poly-Variante</div>
+  <div id="hinweis">Halte die <strong>Turtok-Karte</strong> in die Kamera — der Retro-Low-Poly-Turtok erscheint darauf.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <a-asset-item id="turtok-retro" src="./sprites/sprite-3d-retro.glb"></a-asset-item>
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Idle-Animation rein in A-Frame, dreistufig kombiniert:
+           1. Y-Rotation (langsames Drehen)   -> auf <a-gltf-model>
+           2. Bob Auf/Ab (Wippen/Atmen)       -> auf Wrapper <a-entity> (position)
+           3. Scale-Puls (Atmen)              -> auf Wrapper <a-entity> (scale)
+         Scale-Startwert nach glb-bounds justiert (~0.055 wie index.html;
+         bei abweichenden Bounds hier anpassen). Falls das Mesh flach liegt
+         statt aufrecht zu stehen: rotation="-90 0 0" am Wrapper probieren. -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <!-- Wrapper trägt Bob (position) + Atem-Puls (scale) -->
+      <a-entity
+        position="0 -0.15 0.2"
+        scale="0.055 0.055 0.055"
+        animation__bob="property: position; from: 0 -0.15 0.2; to: 0 -0.09 0.2; dir: alternate; dur: 1600; easing: easeInOutSine; loop: true"
+        animation__breathe="property: scale; from: 0.055 0.055 0.055; to: 0.0575 0.053 0.0575; dir: alternate; dur: 1600; easing: easeInOutSine; loop: true">
+        <!-- inneres Modell trägt die langsame Y-Rotation -->
+        <a-gltf-model
+          src="#turtok-retro"
+          rotation="0 0 0"
+          animation__spin="property: rotation; to: 0 360 0; dur: 18000; easing: linear; loop: true">
+        </a-gltf-model>
+      </a-entity>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

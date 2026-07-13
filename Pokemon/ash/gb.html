@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Ash (Trainer) — AR auf der Karte (Game-Boy-DMG-Variante)</title>
+  <!-- A-Frame + MindAR Bild-Tracking (beide via CDN; Kamera braucht HTTPS) -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin: 0; font-family: -apple-system, system-ui, sans-serif; }
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%);
+      z-index: 5; background: rgba(14,18,44,0.85); color: #fff;
+      padding: 0.6em 1em; border-radius: 999px; font-size: 0.9rem;
+      max-width: 90vw; text-align: center; pointer-events: none;
+      border: 1px solid rgba(245,205,60,0.6);
+    }
+  </style>
+  <script>
+    // Flipbook-Komponente: spielt ein einzeiliges Spritesheet (COLS x ROWS Zellen)
+    // per Textur-UV-Offset auf einer <a-plane> ab. A-Frame animiert GIF NICHT nativ.
+    AFRAME.registerComponent('sprite-flipbook', {
+      schema: {
+        cols: { default: 8 },
+        rows: { default: 1 },
+        fps:  { default: 8 }
+      },
+      init: function () {
+        this.frame = 0; this.acc = 0; this.tex = null;
+        const setup = (texture) => {
+          this.tex = texture;
+          this.tex.wrapS = this.tex.wrapT = THREE.RepeatWrapping;
+          this.tex.repeat.set(1 / this.data.cols, 1 / this.data.rows);
+          this.tex.magFilter = THREE.NearestFilter;   // harte Pixelkanten (8-bit)
+          this.tex.minFilter = THREE.NearestFilter;
+          this.tex.generateMipmaps = false;
+          this.setFrame(0);
+        };
+        this.el.addEventListener('materialtextureloaded', (e) => setup(e.detail.texture));
+        // Fallback, falls das Event schon durch ist
+        const m = this.el.getObject3D('mesh');
+        if (m && m.material && m.material.map) setup(m.material.map);
+      },
+      setFrame: function (f) {
+        if (!this.tex) return;
+        const c = this.data.cols, r = this.data.rows;
+        const col = f % c;
+        const row = Math.floor(f / c) % r;
+        this.tex.offset.x = col / c;
+        this.tex.offset.y = 1 - (row + 1) / r;   // three.js UV ist unten-oben
+      },
+      tick: function (time, dt) {
+        if (!this.tex || !dt) return;
+        this.acc += dt;
+        const spf = 1000 / this.data.fps;
+        while (this.acc >= spf) {
+          this.acc -= spf;
+          this.frame = (this.frame + 1) % (this.data.cols * this.data.rows);
+          this.setFrame(this.frame);
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="hinweis">Halte die <strong>Ash-Karte</strong> in die Kamera — der Trainer erscheint als <strong>Game-Boy-DMG-Sprite</strong> (4-Ton-Grün) darauf.</div>
+
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.0001; filterBeta: 0.01"
+    color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+    <a-assets>
+      <!-- Game-Boy-DMG-Idle-Spritesheet (transparent, 4-Ton-Grün), 8 Frames in einer Zeile.
+           Zum Vergleich am Gerät: src auf ./sprites/sprite-2d-gb-color-sheet.png tauschen (GBC-Farbe)
+           bzw. ./sprites/sprite-2d-sheet.png (Original-8-bit). -->
+      <img id="ash-sheet" src="./sprites/sprite-2d-gb-dmg-sheet.png" crossorigin="anonymous">
+    </a-assets>
+
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <!-- targetIndex 0 = erstes (einziges) Zielbild in targets.mind.
+         Der Sprite steht aufrecht auf der Karte und bounct (Idle). -->
+    <a-entity mindar-image-target="targetIndex: 0">
+      <a-plane
+        sprite-flipbook="cols: 8; rows: 1; fps: 8"
+        material="src: #ash-sheet; transparent: true; shader: flat; side: double; alphaTest: 0.5"
+        position="0 0.05 0.06"
+        rotation="0 0 0"
+        width="1"
+        height="1"
+        scale="1.15 1.15 1.15">
+      </a-plane>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    // Overlay ausblenden, sobald das Ziel erkannt ist
+    window.addEventListener('DOMContentLoaded', () => {
+      const target = document.querySelector('[mindar-image-target]');
+      const hint = document.getElementById('hinweis');
+      target.addEventListener('targetFound', () => { hint.style.display = 'none'; });
+      target.addEventListener('targetLost', () => { hint.style.display = 'block'; });
+    });
+  </script>
+</body>
+</html>

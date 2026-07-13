@@ -4,7 +4,10 @@
 */prompts/
 */artwork/
 */sprites/sprite-2d-frames/
-*/sprites/sprite-3d-raw.glb
+*/sprites/*-raw.glb
+*/sprites/*artwork*.png
+*/sprites/*basis*.png
+*/sprites/retro-lowpoly.png
 */sprites/*.gif
 */render_*.py
 */build_*.py
