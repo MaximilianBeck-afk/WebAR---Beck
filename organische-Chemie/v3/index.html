@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Organische Chemie AR — v3 (Barcode, Layout a)</title>
+  <title>Organische Chemie AR — v3 (Barcode, Layout b)</title>
   <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
   <style>
@@ -14,7 +14,7 @@
   </style>
 </head>
 <body>
-  <div id="hinweis">v3 · Layout a — halte Methan &amp; Propanon gleichzeitig in die Kamera. Größe justieren: ?s=1.5</div>
+  <div id="hinweis">v3 · Layout b — halte Methan &amp; Propanon gleichzeitig in die Kamera. Größe justieren: ?s=1.5</div>
   <a-scene
     embedded
     vr-mode-ui="enabled: false"
@@ -28,15 +28,15 @@
 
     <!-- ID 0 = Methan (Alkane) · Marker in der Ecke, Modell schwebt über der Kartenmitte -->
     <a-marker type="barcode" value="0">
-      <a-gltf-model class="mol" data-base="1.5" src="#m_methan"
-        position="-2.42 4.00 1.5" rotation="0 0 0" scale="1.5 1.5 1.5"
+      <a-gltf-model class="mol" data-base="0.45" src="#m_methan"
+        position="0 0 0.3" rotation="0 0 0" scale="0.45 0.45 0.45"
         animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear"></a-gltf-model>
     </a-marker>
 
     <!-- ID 27 = Propanon (Ketone) -->
     <a-marker type="barcode" value="27">
-      <a-gltf-model class="mol" data-base="1.5" src="#m_propanon"
-        position="-2.42 4.00 1.5" rotation="0 0 0" scale="1.5 1.5 1.5"
+      <a-gltf-model class="mol" data-base="0.45" src="#m_propanon"
+        position="0 0 0.3" rotation="0 0 0" scale="0.45 0.45 0.45"
         animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear"></a-gltf-model>
     </a-marker>
 
