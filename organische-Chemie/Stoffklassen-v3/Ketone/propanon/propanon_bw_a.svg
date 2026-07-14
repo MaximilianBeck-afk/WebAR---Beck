@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="105mm" height="148mm" viewBox="0 0 1240 1748">
+  <defs>
+    <clipPath id="imgClip"><rect x="192" y="342" width="856" height="856" rx="10" ry="10"/></clipPath>
+    <clipPath id="cornClip"><rect x="895" y="1409" width="247" height="247" rx="8" ry="8"/></clipPath>
+    <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#BA5F34"/><stop offset="1" stop-color="#854425"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="1240" height="1748" fill="#F7F1E1"/>
+  <rect x="30" y="30" width="1180" height="1688" rx="26" ry="26" fill="#FBF7EC" stroke="#6A361E" stroke-width="7"/>
+  <rect x="50" y="50" width="1140" height="1648" rx="16" ry="16" fill="none" stroke="#A0522D" stroke-width="3"/>
+  <rect x="60" y="60" width="1120" height="1628" rx="12" ry="12" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity="0.55"/>
+  <rect x="74" y="76" width="1092" height="214" rx="12" ry="12" fill="url(#bandGrad)"/>
+  <rect x="86" y="88" width="1068" height="190" rx="8" ry="8" fill="none" stroke="#E9D8A6" stroke-width="1.5" opacity="0.6"/>
+  <text x="620" y="134" text-anchor="middle" font-family="Georgia, serif" font-size="25" letter-spacing="7" fill="#DCEBF5">ORGANISCHE CHEMIE &#183; SAMMELKARTE</text>
+  <line x1="466" y1="152" x2="774" y2="152" stroke="#C9A24B" stroke-width="1.5" opacity="0.85"/>
+  <text x="620" y="248" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold" font-size="84" letter-spacing="9" fill="#FFFFFF">KETONE</text>
+  <circle cx="1112" cy="140" r="40" fill="#FBF7EC" stroke="#6A361E" stroke-width="4"/>
+  <text x="1112" y="138" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold" font-size="40" fill="#6A361E">1</text>
+  <text x="1112" y="166" text-anchor="middle" font-family="Georgia, serif" font-size="18" fill="#A0522D">/ 4</text>
+  <rect x="170" y="320" width="900" height="900" rx="20" ry="20" fill="#FFFFFF" stroke="#6A361E" stroke-width="5"/>
+  <rect x="182" y="332" width="876" height="876" rx="14" ry="14" fill="none" stroke="#A0522D" stroke-width="2" opacity="0.7"/>
+  <image x="192" y="342" width="856" height="856" clip-path="url(#imgClip)" preserveAspectRatio="xMidYMid slice" xlink:href="/Users/maximilianbeck/Desktop/brain/05_Claude-Output/WebAR/organische-Chemie/Stoffklassen/Ketone/propanon/propanon-woodblock.png"/>
+  <circle cx="170" cy="320" r="9" fill="#C9A24B"/><circle cx="1070" cy="320" r="9" fill="#C9A24B"/>
+  <circle cx="170" cy="1220" r="9" fill="#C9A24B"/><circle cx="1070" cy="1220" r="9" fill="#C9A24B"/>
+  <text x="620" y="1318" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold" font-size="92" fill="#6A361E">Propanon</text>
+  <text x="620" y="1368" text-anchor="middle" font-family="Georgia, serif" font-size="44" fill="#3A2E1E"><tspan>C</tspan><tspan font-size="30" dy="12">3</tspan><tspan dy="-12">H</tspan><tspan font-size="30" dy="12">6</tspan><tspan dy="-12">O</tspan><tspan font-size="30">&#160;&#160;&#8226;&#160;&#160;</tspan><tspan>C</tspan><tspan>H</tspan><tspan font-size="30" dy="12">3</tspan><tspan dy="-12">–</tspan><tspan>C</tspan><tspan>O</tspan><tspan>–</tspan><tspan>C</tspan><tspan>H</tspan><tspan font-size="30" dy="12">3</tspan></text>
+  <line x1="95" y1="1400" x2="852" y2="1400" stroke="#A0522D" stroke-width="2" opacity="0.6"/>
+  <rect x="95" y="1408" width="228" height="46" rx="23" ry="23" fill="#A0522D"/>
+  <text x="209" y="1439" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="26" letter-spacing="3" fill="#FFFFFF">MERKMALE</text>
+  <text x="95" y="1498" font-family="Georgia, serif" font-size="30" fill="#23303A">farblose Flüssigkeit · charakteristischer Geruch</text>
+  <text x="95" y="1536" font-family="Georgia, serif" font-size="30" fill="#23303A">flüchtig · mit Wasser mischbar</text>
+  <rect x="95" y="1552" width="262" height="46" rx="23" ry="23" fill="#6A361E"/>
+  <text x="226" y="1583" text-anchor="middle" font-family="Georgia, serif" font-weight="bold" font-size="26" letter-spacing="3" fill="#FFFFFF">VERWENDUNG</text>
+  <text x="95" y="1642" font-family="Georgia, serif" font-size="30" fill="#23303A">Lösungsmittel</text>
+  <text x="95" y="1680" font-family="Georgia, serif" font-size="30" fill="#23303A">Nagellackentferner · Reinigung</text>
+  <rect x="871" y="1385" width="295" height="295" rx="14" ry="14" fill="#FFFFFF" stroke="#A0522D" stroke-width="3"/>
+  <rect x="895.00" y="1409.00" width="247.00" height="247.00" fill="#FFFFFF"/>
+  <rect x="934.93" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1037.85" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1448.93" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1037.85" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1469.52" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1490.10" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1490.10" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1490.10" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1490.10" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1490.10" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1510.68" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1510.68" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1510.68" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1510.68" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1510.68" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1510.68" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1531.27" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1551.85" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1037.85" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1572.43" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="934.93" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="955.51" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="976.10" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="996.68" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1017.26" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1037.85" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1058.43" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <rect x="1079.02" y="1593.02" width="23.05" height="23.05" fill="#000000"/>
+  <text x="1018" y="1420" text-anchor="middle" font-family="Georgia, serif" font-size="19" fill="#9AA6B0">AR-Marker</text>
+</svg>
