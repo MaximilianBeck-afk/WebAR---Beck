@@ -77,10 +77,9 @@ MindAR (Natural Feature Tracking) skaliert prinzipiell schlecht auf viele ähnli
 **Zusatz Sitzung 169 (nach dem Braun-b-Erfolg):**
 - **Touch-Gesten eingebaut** (`…/v3/index.html`): 1 Finger drehen, 2 Finger zoomen (inline `gesture-detector`/`gesture-handler`); Auto-Rotation entfernt; Verschieben bewusst weggelassen.
 - **Folgeprojekt dokumentiert:** Kartenkombination → Reaktionsmechanismus → `02_Projekte/Digitale-Bildung-Schule/ideen/AR-Reaktionsmechanismus-Kartenkombination.md`.
-- **Seite steht aktuell wieder auf Layout a** (Ecken-Marker) MIT Z-Fix — User re-testet, ob a mit dem Fix brauchbar ist; sonst bleibt b.
+- **Design-Entscheidung ENDGÜLTIG: Layout b in braun.** Layout a (Ecken-Marker) auch mit Z-Fix verworfen — auf A6 zu klein, gedruckt noch schlechter (User, Sitzung 169). Seite steht final auf b (`position="0 0 0.3"`, `scale 0.45`) + Gesten + Z-Fix.
 
 **Offen / nächste Schritte:**
-1. **Design-Entscheidung a vs b** festzurren. b = funktioniert auf A6 (Kunst nur Ecke). a = Kunst groß, aber Marker zu klein auf A6 → **Alternative: größeres Format (A5/A4)** für a mit ausreichend großem Ecken-Marker (kurzer Gerätetest offen).
-2. **39er-Ausrollung** als `Stoffklassen-v3` (finales Layout/Farbe) + AR-Seite mit 39 Markern — deterministisch (`build-card-v3.py` über alle 39, Marker-ID = Index), kein Agenten-Bedarf.
-3. **QR/Seiten-Öffner** auf **Rückseite** (Vorderseite ist voll). QR-Muster in `_qr-muster/` verworfen.
+1. **39er-Ausrollung** als `Stoffklassen-v3` in **Layout b / braun** + AR-Seite mit 39 Markern — deterministisch (`build-card-v3.py --layout b --color braun` über alle 39, Marker-ID = Index), kein Agenten-Bedarf.
+2. **QR/Seiten-Öffner** auf **Rückseite** (Vorderseite ist voll). QR-Muster in `_qr-muster/` verworfen.
 
