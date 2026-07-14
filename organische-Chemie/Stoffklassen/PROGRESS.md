@@ -74,5 +74,13 @@ MindAR (Natural Feature Tracking) skaliert prinzipiell schlecht auf viele ähnli
 
 **Werkzeuge:** `_pipeline/build-card-v3.py` (`--layout a|b --color bw|braun --marker-png <id>.png`), `Stoffklassen-v3/_markers/gen-marker-svg.py` (Marker-SVG 2 Schemata), Marker-Sammlung `4x4_bch_13_9_3` von nicolocarpignoli/artoolkit-barcode-markers-collection.
 
-**Offen:** (1) 39er-Ausrollung als `Stoffklassen-v3` + AR-Seite mit 39 Markern; (2) QR/Seiten-Öffner (auf Karte vertagt — QR-Muster A_styled/B_woodblock in `_qr-muster/` verworfen, evtl. Rückseite); (3) Design-Trade Layout b (Kunst nur in der Ecke) — bewusst zugunsten Funktion gewählt.
+**Zusatz Sitzung 169 (nach dem Braun-b-Erfolg):**
+- **Touch-Gesten eingebaut** (`…/v3/index.html`): 1 Finger drehen, 2 Finger zoomen (inline `gesture-detector`/`gesture-handler`); Auto-Rotation entfernt; Verschieben bewusst weggelassen.
+- **Folgeprojekt dokumentiert:** Kartenkombination → Reaktionsmechanismus → `02_Projekte/Digitale-Bildung-Schule/ideen/AR-Reaktionsmechanismus-Kartenkombination.md`.
+- **Seite steht aktuell wieder auf Layout a** (Ecken-Marker) MIT Z-Fix — User re-testet, ob a mit dem Fix brauchbar ist; sonst bleibt b.
+
+**Offen / nächste Schritte:**
+1. **Design-Entscheidung a vs b** festzurren. b = funktioniert auf A6 (Kunst nur Ecke). a = Kunst groß, aber Marker zu klein auf A6 → **Alternative: größeres Format (A5/A4)** für a mit ausreichend großem Ecken-Marker (kurzer Gerätetest offen).
+2. **39er-Ausrollung** als `Stoffklassen-v3` (finales Layout/Farbe) + AR-Seite mit 39 Markern — deterministisch (`build-card-v3.py` über alle 39, Marker-ID = Index), kein Agenten-Bedarf.
+3. **QR/Seiten-Öffner** auf **Rückseite** (Vorderseite ist voll). QR-Muster in `_qr-muster/` verworfen.
 
