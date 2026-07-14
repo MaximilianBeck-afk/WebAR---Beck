@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="220" viewBox="0 0 1080 220">
+  <title>Alkane / Kette / methan</title>
+  <g fill="none" stroke="#1A1A1A" stroke-width="5.0" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="40.0" y="68.0" width="132" height="108" rx="40" ry="40" transform="rotate(-1.1 106.0 122.0)"/>
+    <rect x="132.0" y="44.0" width="132" height="108" rx="40" ry="40" transform="rotate(2.2 198.0 98.0)"/>
+    <rect x="224.0" y="68.0" width="132" height="108" rx="40" ry="40" transform="rotate(-0.1 290.0 122.0)"/>
+    <rect x="316.0" y="44.0" width="132" height="108" rx="40" ry="40" transform="rotate(3.0 382.0 98.0)"/>
+    <rect x="408.0" y="68.0" width="132" height="108" rx="40" ry="40" transform="rotate(5.0 474.0 122.0)"/>
+    <rect x="500.0" y="44.0" width="132" height="108" rx="40" ry="40" transform="rotate(-2.8 566.0 98.0)"/>
+    <rect x="592.0" y="68.0" width="132" height="108" rx="40" ry="40" transform="rotate(3.8 658.0 122.0)"/>
+    <rect x="684.0" y="44.0" width="132" height="108" rx="40" ry="40" transform="rotate(2.7 750.0 98.0)"/>
+    <rect x="776.0" y="68.0" width="132" height="108" rx="40" ry="40" transform="rotate(-3.7 842.0 122.0)"/>
+    <rect x="868.0" y="44.0" width="132" height="108" rx="40" ry="40" transform="rotate(-4.3 934.0 98.0)"/>
+    <rect x="960.0" y="68.0" width="132" height="108" rx="40" ry="40" transform="rotate(-2.3 1026.0 122.0)"/>
+    <circle cx="1026.0" cy="122.0" r="9" fill="#1A1A1A" stroke="none"/>
+  </g>
+</svg>
