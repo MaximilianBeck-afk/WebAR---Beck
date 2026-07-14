@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="105mm" height="148mm" viewBox="0 0 1240 1748">
+  <defs>
+    <!-- Guilloché-Bordüre als wiederholbares Wellen-Muster -->
+    <pattern id="guilloche" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(0)">
+      <path d="M0,40 C20,10 20,70 40,40 C60,10 60,70 80,40" fill="none" stroke="#C9A24B" stroke-width="1.2" opacity="0.55"/>
+      <path d="M0,40 C20,70 20,10 40,40 C60,70 60,10 80,40" fill="none" stroke="#C9A24B" stroke-width="1.2" opacity="0.4"/>
+    </pattern>
+    <!-- Radiale Guilloché-Rosette hinter dem Emblem -->
+    <radialGradient id="fieldGlow" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FBF7EC"/>
+    </radialGradient>
+    <!-- Ornament-Filigran (Viertel) für die vier Ecken -->
+    <g id="cornerFlourish">
+      <path d="M0,0 C60,4 110,20 150,60 C120,58 96,66 78,86 C74,60 52,40 22,34 C34,24 30,10 0,0 Z"
+            fill="none" stroke="#C9A24B" stroke-width="2.4" opacity="0.85"/>
+      <path d="M14,14 C58,22 92,44 118,84" fill="none" stroke="#3A2E1E" stroke-width="1.4" opacity="0.5"/>
+      <circle cx="150" cy="60" r="5" fill="#C9A24B"/>
+      <circle cx="78" cy="86" r="4" fill="#C9A24B"/>
+      <circle cx="22" cy="34" r="4" fill="#C9A24B"/>
+    </g>
+    <!-- kleines Molekül-Emblem (neutral, generisch: Tetraeder-Andeutung, keine bestimmte Klasse) -->
+    <g id="atomEmblem">
+      <circle cx="0" cy="0" r="150" fill="none" stroke="#C9A24B" stroke-width="2.5" opacity="0.7"/>
+      <circle cx="0" cy="0" r="150" fill="none" stroke="#C9A24B" stroke-width="7" opacity="0.9" stroke-dasharray="2 22" stroke-linecap="round"/>
+      <ellipse cx="0" cy="0" rx="120" ry="46" fill="none" stroke="#3A2E1E" stroke-width="2" opacity="0.55"/>
+      <ellipse cx="0" cy="0" rx="120" ry="46" fill="none" stroke="#3A2E1E" stroke-width="2" opacity="0.55" transform="rotate(60)"/>
+      <ellipse cx="0" cy="0" rx="120" ry="46" fill="none" stroke="#3A2E1E" stroke-width="2" opacity="0.55" transform="rotate(120)"/>
+      <circle cx="120" cy="0" r="12" fill="#C9A24B"/>
+      <circle cx="-120" cy="0" r="12" fill="#C9A24B"/>
+      <circle cx="60" cy="104" r="12" fill="#C9A24B"/>
+      <circle cx="-60" cy="104" r="12" fill="#C9A24B"/>
+      <circle cx="60" cy="-104" r="12" fill="#C9A24B"/>
+      <circle cx="-60" cy="-104" r="12" fill="#C9A24B"/>
+      <circle cx="0" cy="0" r="26" fill="#3A2E1E"/>
+      <circle cx="0" cy="0" r="26" fill="none" stroke="#C9A24B" stroke-width="2.5"/>
+    </g>
+  </defs>
+
+  <!-- Pergament-Grund -->
+  <rect x="0" y="0" width="1240" height="1748" fill="#F7F1E1"/>
+
+  <!-- Verschachtelte Rahmen wie Vorderseite -->
+  <rect x="30" y="30" width="1180" height="1688" rx="26" fill="#FBF7EC" stroke="#3A2E1E" stroke-width="7"/>
+  <rect x="50" y="50" width="1140" height="1648" rx="16" fill="none" stroke="#C9A24B" stroke-width="3"/>
+  <rect x="60" y="60" width="1120" height="1628" rx="12" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity="0.55"/>
+
+  <!-- Guilloché-Bordürenband, umlaufend zwischen Rahmen und Innenfeld -->
+  <rect x="86" y="86" width="1068" height="1576" rx="10" fill="none" stroke="url(#guilloche)" stroke-width="26"/>
+  <rect x="112" y="112" width="1016" height="1524" rx="8" fill="none" stroke="#3A2E1E" stroke-width="1.4" opacity="0.45"/>
+
+  <!-- Ecken-Filigran (vier gespiegelte Kopien) -->
+  <use href="#cornerFlourish" transform="translate(128,128)"/>
+  <use href="#cornerFlourish" transform="translate(1112,128) scale(-1,1)"/>
+  <use href="#cornerFlourish" transform="translate(128,1620) scale(1,-1)"/>
+  <use href="#cornerFlourish" transform="translate(1112,1620) scale(-1,-1)"/>
+
+  <!-- Ecken-Zierpunkte wie Vorderseite -->
+  <circle cx="60" cy="60" r="9" fill="#C9A24B"/>
+  <circle cx="1180" cy="60" r="9" fill="#C9A24B"/>
+  <circle cx="60" cy="1688" r="9" fill="#C9A24B"/>
+  <circle cx="1180" cy="1688" r="9" fill="#C9A24B"/>
+
+  <!-- Kopf-Titel -->
+  <text x="620" y="250" text-anchor="middle" font-family="Georgia, serif" font-size="42" letter-spacing="14" fill="#3A2E1E">O R G A N I S C H E&#160;&#160;C H E M I E</text>
+  <line x1="360" y1="278" x2="880" y2="278" stroke="#C9A24B" stroke-width="2"/>
+  <text x="620" y="356" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold" font-size="52" letter-spacing="3" fill="#241A12">MOLEKÜL-SAMMELKARTEN</text>
+
+  <!-- Zier-Trenner unter Titel -->
+  <g transform="translate(620,420)">
+    <line x1="-220" y1="0" x2="-30" y2="0" stroke="#C9A24B" stroke-width="2"/>
+    <line x1="30" y1="0" x2="220" y2="0" stroke="#C9A24B" stroke-width="2"/>
+    <path d="M-30,0 C-16,-14 16,-14 30,0 C16,14 -16,14 -30,0 Z" fill="none" stroke="#3A2E1E" stroke-width="2"/>
+    <circle cx="0" cy="0" r="5" fill="#C9A24B"/>
+    <circle cx="-30" cy="0" r="3.5" fill="#C9A24B"/>
+    <circle cx="30" cy="0" r="3.5" fill="#C9A24B"/>
+  </g>
+
+  <!-- ===================== MARKER-/QR-FELD ===================== -->
+  <!-- Zierrahmen um das Feld -->
+  <rect x="252" y="502" width="736" height="736" rx="14" fill="none" stroke="#C9A24B" stroke-width="3"/>
+  <rect x="262" y="512" width="716" height="716" rx="12" fill="none" stroke="#3A2E1E" stroke-width="2" opacity="0.55"/>
+  <!-- Eck-Winkel (Passmarken) am Feldrahmen -->
+  <g stroke="#C9A24B" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M282,540 v-24 h24"/>
+    <path d="M958,540 v-24 h-24"/>
+    <path d="M282,1200 v24 h24"/>
+    <path d="M958,1200 v24 h-24"/>
+  </g>
+  <!-- Das ruhige, helle Feld selbst: 700x700, zentriert (x=270 y=520) -->
+  <rect x="270" y="520" width="700" height="700" fill="url(#fieldGlow)"/>
+
+  <!-- AR-Label-Kapsel oberhalb des Felds -->
+  <g transform="translate(620,478)">
+    <rect x="-70" y="-24" width="140" height="46" rx="23" fill="#FBF7EC" stroke="#C9A24B" stroke-width="2"/>
+    <text x="0" y="9" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold" font-size="30" letter-spacing="8" fill="#3A2E1E">AR</text>
+  </g>
+
+  <!-- Hinweis unter dem Feld -->
+  <text x="620" y="1316" text-anchor="middle" font-family="Georgia, serif" font-size="40" letter-spacing="6" fill="#3A2E1E">Scannen für 3D</text>
+
+  <!-- Zier-Trenner unter Hinweis -->
+  <g transform="translate(620,1372)">
+    <line x1="-260" y1="0" x2="-40" y2="0" stroke="#C9A24B" stroke-width="2"/>
+    <line x1="40" y1="0" x2="260" y2="0" stroke="#C9A24B" stroke-width="2"/>
+    <path d="M-40,0 L-16,-11 L16,11 M-16,-11 L16,-11 L40,0 L16,11 L-16,11 Z" fill="none" stroke="#3A2E1E" stroke-width="1.6" opacity="0.7"/>
+    <circle cx="0" cy="0" r="6" fill="#C9A24B"/>
+  </g>
+
+  <!-- Guilloché-Emblem-Rosette im Fuß (symmetrische Zier) -->
+  <g transform="translate(620,1520)" opacity="0.9">
+    <circle cx="0" cy="0" r="92" fill="none" stroke="#C9A24B" stroke-width="1.6" opacity="0.6"/>
+    <g fill="none" stroke="#C9A24B" stroke-width="1.4" opacity="0.7">
+      <path d="M0,-78 C40,-40 40,40 0,78 C-40,40 -40,-40 0,-78 Z"/>
+      <path d="M0,-78 C40,-40 40,40 0,78 C-40,40 -40,-40 0,-78 Z" transform="rotate(45)"/>
+      <path d="M0,-78 C40,-40 40,40 0,78 C-40,40 -40,-40 0,-78 Z" transform="rotate(90)"/>
+      <path d="M0,-78 C40,-40 40,40 0,78 C-40,40 -40,-40 0,-78 Z" transform="rotate(135)"/>
+    </g>
+    <circle cx="0" cy="0" r="30" fill="#FBF7EC" stroke="#C9A24B" stroke-width="2"/>
+    <circle cx="0" cy="0" r="12" fill="#3A2E1E"/>
+  </g>
+
+  <!-- Fuß-Signatur -->
+  <text x="620" y="1650" text-anchor="middle" font-family="Georgia, serif" font-size="30" letter-spacing="10" fill="#3A2E1E" opacity="0.85">S A M M E L K A R T E</text>
+</svg>

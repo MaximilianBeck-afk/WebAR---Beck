@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1240 1748" width="105mm" height="148mm">
+  <!-- ============ GRUND ============ -->
+  <rect x="0" y="0" width="1240" height="1748" fill="#F7F1E1"/>
+
+  <!-- ============ RAHMEN (wie Vorderseite) ============ -->
+  <rect x="30" y="30" width="1180" height="1688" rx="26" fill="#FBF7EC" stroke="#3A2E1E" stroke-width="7"/>
+  <rect x="50" y="50" width="1140" height="1648" rx="16" fill="none" stroke="#C9A24B" stroke-width="3"/>
+  <rect x="60" y="60" width="1120" height="1628" rx="12" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity="0.55"/>
+
+  <!-- Ecken-Zierpunkte -->
+  <circle cx="60"   cy="60"   r="9" fill="#C9A24B"/>
+  <circle cx="1180" cy="60"   r="9" fill="#C9A24B"/>
+  <circle cx="60"   cy="1688" r="9" fill="#C9A24B"/>
+  <circle cx="1180" cy="1688" r="9" fill="#C9A24B"/>
+
+  <!-- ============ EMBLEM (oben, reduziert) ============ -->
+  <polygon points="688,190 654,249 586,249 552,190 586,131 654,131"
+           fill="none" stroke="#C9A24B" stroke-width="4" opacity="0.9"/>
+  <polygon points="676,190 648,238 592,238 564,190 592,142 648,142"
+           fill="none" stroke="#3A2E1E" stroke-width="1.5" opacity="0.5"/>
+  <circle cx="620" cy="190" r="7" fill="#C9A24B"/>
+
+  <!-- ============ TITEL ============ -->
+  <text x="620" y="330" text-anchor="middle"
+        font-family="Rockwell, Georgia, serif" font-weight="bold"
+        font-size="52" letter-spacing="10" fill="#241A12">ORGANISCHE CHEMIE</text>
+
+  <!-- Gold-Divider -->
+  <line x1="360" y1="370" x2="880" y2="370" stroke="#C9A24B" stroke-width="2"/>
+  <circle cx="360" cy="370" r="4" fill="#C9A24B"/>
+  <circle cx="880" cy="370" r="4" fill="#C9A24B"/>
+
+  <text x="620" y="432" text-anchor="middle"
+        font-family="Georgia, serif" font-style="italic"
+        font-size="34" letter-spacing="7" fill="#3A2E1E" opacity="0.85">Molekül-Sammelkarten</text>
+
+  <!-- ============ ZENTRALES FELD (QR / AR-Marker) 700x700 ============ -->
+  <!-- ruhiger, heller Platzhalter -->
+  <rect x="270" y="520" width="700" height="700" rx="10" fill="#FFFFFF"
+        stroke="#3A2E1E" stroke-width="2.5"/>
+  <rect x="284" y="534" width="672" height="672" rx="6" fill="none"
+        stroke="#C9A24B" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- dezente Eck-Registermarken AUSSERHALB des Feldes (funktional, Feld bleibt frei) -->
+  <g stroke="#3A2E1E" stroke-width="4" fill="none" opacity="0.55">
+    <!-- oben links -->
+    <polyline points="252,542 252,502 292,502"/>
+    <!-- oben rechts -->
+    <polyline points="988,542 988,502 948,502"/>
+    <!-- unten links -->
+    <polyline points="252,1198 252,1238 292,1238"/>
+    <!-- unten rechts -->
+    <polyline points="988,1198 988,1238 948,1238"/>
+  </g>
+
+  <!-- ============ SCAN-HINWEIS ============ -->
+  <text x="620" y="1330" text-anchor="middle"
+        font-family="Rockwell, Georgia, serif" font-weight="bold"
+        font-size="40" letter-spacing="8" fill="#241A12">SCANNEN FÜR 3D</text>
+
+  <!-- kleines AR-Symbol (neutraler Würfel-/Marker-Umriss) -->
+  <g transform="translate(620,1430)" stroke="#3A2E1E" stroke-width="3.5" fill="none" opacity="0.8">
+    <!-- Kamera-/AR-Eckklammern -->
+    <polyline points="-70,-18 -70,-40 -48,-40"/>
+    <polyline points="70,-18 70,-40 48,-40"/>
+    <polyline points="-70,40 -70,62 -48,62"/>
+    <polyline points="70,40 70,62 48,62"/>
+    <!-- kleiner Würfel als AR-Objekt -->
+    <polygon points="-22,-6 0,-18 22,-6 0,6" fill="#C9A24B" fill-opacity="0.25"/>
+    <line x1="-22" y1="-6" x2="-22" y2="26"/>
+    <line x1="22"  y1="-6" x2="22"  y2="26"/>
+    <line x1="0"   y1="6"  x2="0"   y2="40"/>
+    <polyline points="-22,26 0,40 22,26"/>
+  </g>
+
+  <!-- ============ FUSS ============ -->
+  <line x1="440" y1="1560" x2="800" y2="1560" stroke="#C9A24B" stroke-width="1.5" opacity="0.6"/>
+  <text x="620" y="1620" text-anchor="middle"
+        font-family="Georgia, serif"
+        font-size="26" letter-spacing="6" fill="#3A2E1E" opacity="0.7">WebAR · Chemie-Kartenset</text>
+</svg>

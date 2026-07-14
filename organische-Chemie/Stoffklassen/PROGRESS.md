@@ -81,5 +81,6 @@ MindAR (Natural Feature Tracking) skaliert prinzipiell schlecht auf viele ähnli
 
 **Offen / nächste Schritte:**
 1. **39er-Ausrollung** als `Stoffklassen-v3` in **Layout b / braun** + AR-Seite mit 39 Markern — deterministisch (`build-card-v3.py --layout b --color braun` über alle 39, Marker-ID = Index), kein Agenten-Bedarf.
-2. **QR/Seiten-Öffner** auf **Rückseite** (Vorderseite ist voll). QR-Muster in `_qr-muster/` verworfen.
+2. **Rückseite DESIGNT** (Sitzung 169): 3 Agenten-Entwürfe → einstimmige KI-Jury → Sieger **Entwurf 2** (minimal-elegant, Gold-Hexagon, großes ruhiges Mittelfeld). Kanonisch `Stoffklassen-v3/_rueckseite/rueckseite.svg`+`.png`, alle Entwürfe + `URTEIL.md` erhalten. **Offen: a/b-Entscheidung** — Mittelfeld nimmt QR (a, Front bleibt) ODER Marker (b, dann QR auf die Front). Danach Mittelfeld füllen.
+3. **QR-/Marker-Assets** ins Mittelfeld einsetzen (je nach a/b), Rückseite für alle 39 identisch drucken. QR-Gestaltungsmuster in `_qr-muster/` verworfen.
 

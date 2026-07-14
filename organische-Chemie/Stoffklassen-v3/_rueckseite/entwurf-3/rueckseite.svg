@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="105mm" height="148mm" viewBox="0 0 1240 1748">
+  <defs>
+    <!-- dezentes Waben-Gitter fuer den Hintergrund -->
+    <pattern id="waben" width="103.92" height="180" patternUnits="userSpaceOnUse">
+      <g fill="none" stroke="#C9A24B" stroke-width="2.2" opacity="0.20">
+        <!-- korrektes Waben-Tiling (pointy-top), 2 Sechsecke pro Kachel -->
+        <polygon points="0,-60 51.96,-30 51.96,30 0,60 -51.96,30 -51.96,-30"/>
+        <polygon points="0,120 51.96,150 51.96,210 0,240 -51.96,210 -51.96,150"/>
+        <polygon points="51.96,30 103.92,60 103.92,120 51.96,150 0,120 0,60"/>
+        <polygon points="-51.96,30 0,60 0,120 -51.96,150 -103.92,120 -103.92,60"/>
+      </g>
+    </pattern>
+    <radialGradient id="feldGlanz" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="100%" stop-color="#FBFAF5"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Pergament-Grund -->
+  <rect x="0" y="0" width="1240" height="1748" fill="#F7F1E1"/>
+
+  <!-- verschachtelte gerundete Rahmen wie vorne -->
+  <rect x="30" y="30" width="1180" height="1688" rx="26" fill="#FBF7EC" stroke="#3A2E1E" stroke-width="7"/>
+
+  <!-- Waben-Emblem-Hintergrund: nur innerhalb des Rahmens, dezent, nicht im Mittelfeld -->
+  <clipPath id="innen">
+    <rect x="53" y="53" width="1134" height="1642" rx="18"/>
+  </clipPath>
+  <g clip-path="url(#innen)">
+    <rect x="53" y="53" width="1134" height="1642" fill="url(#waben)"/>
+  </g>
+
+  <!-- Akzentrahmen + Gold-Haarlinie -->
+  <rect x="50" y="50" width="1140" height="1648" rx="16" fill="none" stroke="#C9A24B" stroke-width="3"/>
+  <rect x="60" y="60" width="1120" height="1628" rx="12" fill="none" stroke="#C9A24B" stroke-width="1.5" opacity="0.55"/>
+
+  <!-- Ecken-Zierpunkte -->
+  <circle cx="60" cy="60" r="9" fill="#C9A24B"/>
+  <circle cx="1180" cy="60" r="9" fill="#C9A24B"/>
+  <circle cx="60" cy="1688" r="9" fill="#C9A24B"/>
+  <circle cx="1180" cy="1688" r="9" fill="#C9A24B"/>
+
+  <!-- ===================== KOPF ===================== -->
+  <text x="620" y="185" text-anchor="middle" font-family="Georgia, serif" font-size="36"
+        letter-spacing="9" fill="#3A2E1E">MOLEKÜL-SAMMELKARTEN</text>
+  <!-- kurze Zierlinie unter dem Kicker -->
+  <line x1="470" y1="215" x2="770" y2="215" stroke="#C9A24B" stroke-width="2.5"/>
+  <circle cx="620" cy="215" r="5" fill="#C9A24B"/>
+
+  <text x="620" y="315" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold"
+        font-size="96" letter-spacing="6" fill="#241A12">ORGANISCHE</text>
+  <text x="620" y="415" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold"
+        font-size="96" letter-spacing="20" fill="#241A12">CHEMIE</text>
+
+  <!-- ===================== EMBLEM ueber dem Feld: stilisierte Atom-Ringe ===================== -->
+  <g transform="translate(620,475)" fill="none" stroke="#C9A24B" stroke-width="3" opacity="0.85">
+    <ellipse rx="70" ry="26"/>
+    <ellipse rx="70" ry="26" transform="rotate(60)"/>
+    <ellipse rx="70" ry="26" transform="rotate(120)"/>
+    <circle r="9" fill="#3A2E1E" stroke="none"/>
+    <circle cx="70" cy="0" r="5" fill="#C9A24B" stroke="none" transform="rotate(0)"/>
+  </g>
+
+  <!-- ===================== MITTLERES PLATZHALTER-FELD (QR / AR-Marker) ===================== -->
+  <!-- ruhig, hell, gross, ohne Muster -->
+  <!-- kleines AR-Label darueber -->
+  <text x="620" y="590" text-anchor="middle" font-family="Rockwell, Georgia, serif" font-weight="bold"
+        font-size="34" letter-spacing="10" fill="#3A2E1E">AR &#183; SCANNEN FÜR 3D</text>
+
+  <!-- Rahmen ums Feld (etwas groesser als das ruhige Innenfeld) -->
+  <rect x="256" y="612" width="728" height="728" rx="18" fill="none" stroke="#3A2E1E" stroke-width="4"/>
+  <rect x="266" y="622" width="708" height="708" rx="14" fill="none" stroke="#C9A24B" stroke-width="2" opacity="0.7"/>
+  <!-- das eigentliche ruhige Feld: 700x700 zentriert bei x=270 y=520? Vorgabe x=270 y=520 -> hier tiefer wegen Kopf -->
+  <rect x="270" y="626" width="700" height="700" rx="10" fill="url(#feldGlanz)"/>
+
+  <!-- dezente Eck-Winkel als AR-Marker-Andeutung, AUSSERHALB des ruhigen Feldes am Rahmen -->
+  <g stroke="#C9A24B" stroke-width="4" fill="none" opacity="0.9">
+    <path d="M256 646 L256 612 L290 612"/>
+    <path d="M950 612 L984 612 L984 646"/>
+    <path d="M256 1306 L256 1340 L290 1340"/>
+    <path d="M950 1340 L984 1340 L984 1306"/>
+  </g>
+
+  <!-- ===================== FUSS ===================== -->
+  <line x1="270" y1="1420" x2="970" y2="1420" stroke="#C9A24B" stroke-width="2"/>
+  <circle cx="620" cy="1420" r="5" fill="#C9A24B"/>
+
+  <text x="620" y="1490" text-anchor="middle" font-family="Georgia, serif" font-size="40"
+        fill="#3A2E1E" font-style="italic">Kamera auf das Feld richten &#183; Modell erscheint in 3D</text>
+
+  <text x="620" y="1590" text-anchor="middle" font-family="Georgia, serif" font-size="34"
+        letter-spacing="8" fill="#3A2E1E" opacity="0.85">W E B A R &#183; O R G A N I S C H E &#160; C H E M I E</text>
+
+  <!-- kleines Sechseck-Emblem im Fuss -->
+  <g transform="translate(620,1650)" fill="none" stroke="#C9A24B" stroke-width="3">
+    <polygon points="0,-34 29.4,-17 29.4,17 0,34 -29.4,17 -29.4,-17"/>
+    <circle r="7" fill="#3A2E1E" stroke="none"/>
+  </g>
+</svg>
