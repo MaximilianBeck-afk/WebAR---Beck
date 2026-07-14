@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>AR-Test — nur Methan</title>
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <style>
+    body { margin:0; font-family:-apple-system,system-ui,sans-serif; }
+    #status { position:fixed; left:50%; top:16px; transform:translateX(-50%); z-index:9;
+      background:rgba(20,20,26,.85); color:#fff; padding:.6em 1em; border-radius:12px;
+      font-size:.95rem; max-width:92vw; text-align:center; line-height:1.4; }
+    #status b { color:#7CFC7C; }
+  </style>
+</head>
+<body>
+  <div id="status">AR-Test Methan<br><span id="track">Suche Karte …</span><br><small id="log" style="color:#bbb"></small></div>
+  <a-scene
+    mindar-image="imageTargetSrc: ./targets.mind; maxTrack: 1; autoStart: true; uiLoading: yes; uiScanning: yes; uiError: yes; filterMinCF: 0.01; filterBeta: 30"
+    color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights"
+    vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-assets>
+      <a-asset-item id="methan" src="./methan.glb"></a-asset-item>
+    </a-assets>
+    <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+    <a-entity id="target" mindar-image-target="targetIndex: 0">
+      <!-- REFERENZ-WÜRFEL: erscheint, sobald die Karte erkannt ist (auch ohne Modell).
+           Kantenlänge 0.2 in Karten-Einheiten -> zeigt die AR-Größenordnung. -->
+      <a-box position="0 0 0.1" width="0.2" height="0.2" depth="0.2"
+             color="#E01010" opacity="0.85"></a-box>
+      <!-- METHAN-Modell: gleiche Skalierung wie auf der großen Seite (targetIndex 0 = 2.39),
+           via ?s= global justierbar. Auto-Rotation. -->
+      <a-gltf-model id="mol" src="#methan"
+        position="0 0 0.1" rotation="0 0 0" scale="2.39 2.39 2.39"
+        animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear"></a-gltf-model>
+    </a-entity>
+  </a-scene>
+
+  <script>
+    var track = document.getElementById('track');
+    var log = document.getElementById('log');
+    // globaler Größen-Regler ?s=
+    var f = parseFloat(new URLSearchParams(location.search).get('s'));
+    window.addEventListener('DOMContentLoaded', function() {
+      var mol = document.getElementById('mol');
+      if (f && f > 0) { var b = 2.39 * f; mol.setAttribute('scale', b+' '+b+' '+b); log.textContent = 'Skala ×'+f+' (='+b.toFixed(2)+')'; }
+      else { log.textContent = 'Skala 2.39 — teste ?s=0.3 / ?s=0.1'; }
+      var t = document.getElementById('target');
+      t.addEventListener('targetFound', function(){ track.innerHTML = '<b>Karte erkannt ✓</b> — roter Würfel + Modell sollten sichtbar sein'; });
+      t.addEventListener('targetLost', function(){ track.textContent = 'Karte verloren — wieder ins Bild halten'; });
+      mol.addEventListener('model-loaded', function(){ log.textContent += ' · Modell geladen ✓'; });
+      mol.addEventListener('model-error', function(){ log.textContent += ' · MODELL-FEHLER ✗'; });
+    });
+  </script>
+</body>
+</html>
