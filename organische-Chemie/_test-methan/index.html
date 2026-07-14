@@ -33,7 +33,7 @@
       <!-- METHAN-Modell: gleiche Skalierung wie auf der großen Seite (targetIndex 0 = 2.39),
            via ?s= global justierbar. Auto-Rotation. -->
       <a-gltf-model id="mol" src="#methan"
-        position="0 0 0.1" rotation="0 0 0" scale="2.39 2.39 2.39"
+        position="0 0 0.1" rotation="0 0 0" scale="0.36 0.36 0.36"
         animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear"></a-gltf-model>
     </a-entity>
   </a-scene>
@@ -45,8 +45,8 @@
     var f = parseFloat(new URLSearchParams(location.search).get('s'));
     window.addEventListener('DOMContentLoaded', function() {
       var mol = document.getElementById('mol');
-      if (f && f > 0) { var b = 2.39 * f; mol.setAttribute('scale', b+' '+b+' '+b); log.textContent = 'Skala ×'+f+' (='+b.toFixed(2)+')'; }
-      else { log.textContent = 'Skala 2.39 — teste ?s=0.3 / ?s=0.1'; }
+      if (f && f > 0) { var b = 0.36 * f; mol.setAttribute('scale', b+' '+b+' '+b); log.textContent = 'Skala ×'+f+' (='+b.toFixed(2)+')'; }
+      else { log.textContent = 'Skala 0.36 — teste ?s=0.5 / ?s=2'; }
       var t = document.getElementById('target');
       t.addEventListener('targetFound', function(){ track.innerHTML = '<b>Karte erkannt ✓</b> — roter Würfel + Modell sollten sichtbar sein'; });
       t.addEventListener('targetLost', function(){ track.textContent = 'Karte verloren — wieder ins Bild halten'; });
