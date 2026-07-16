@@ -136,7 +136,7 @@
 
     <!-- Marker 41 = belohnung-pokal (zentrale Registry, _tools/webar-marker-registry) -->
     <a-marker type="barcode" value="41" reward-trigger>
-      <a-entity id="scene-root" confetti-emitter>
+      <a-entity id="scene-root" confetti-emitter data-base="6" scale="6 6 6">
 
         <!-- L0: Strahlen-Burst — schnelles Aufpoppen + sanftes Pulsieren -->
         <a-entity class="fx" id="burst"
@@ -194,7 +194,8 @@
     if (f && f > 0) {
       window.addEventListener("DOMContentLoaded", function () {
         var root = document.querySelector("#scene-root");
-        if (root) root.setAttribute("scale", f + " " + f + " " + f);
+        var b = (parseFloat(root && root.getAttribute("data-base")) || 1) * f;
+        if (root) root.setAttribute("scale", b + " " + b + " " + b);
       });
     }
   </script>

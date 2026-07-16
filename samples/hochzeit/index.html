@@ -34,6 +34,8 @@
 
     <!-- Marker 40 = hochzeit-ringe (zentrale Registry, _tools/webar-marker-registry) -->
     <a-marker type="barcode" value="40">
+      <!-- Gesamt-Groesse der Szene (x6, Sitzung 173): skaliert Schichten UND ihre Abstaende gemeinsam -->
+      <a-entity id="scene-root" scale="6 6 6">
 
       <!-- L0 — Licht-/Glow-Schleier: warmer Untergrund-Schimmer, langsames Pulsieren -->
       <a-plane class="layer" data-base="1.7" src="#tex_glow"
@@ -91,6 +93,7 @@
         animation__schweben="property: position; dir: alternate; loop: true; dur: 3400; easing: easeInOutSine; from: 0 0.02 1.02; to: 0 0.02 1.09">
       </a-plane>
 
+      </a-entity>
     </a-marker>
 
     <a-entity camera></a-entity>
