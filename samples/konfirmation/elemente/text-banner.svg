@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340">
+  <defs>
+    <linearGradient id="txtGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B8863C"/>
+      <stop offset="0.5" stop-color="#E9CE93"/>
+      <stop offset="1" stop-color="#B8863C"/>
+    </linearGradient>
+  </defs>
+  <line x1="60" y1="90" x2="440" y2="90" stroke="#B8863C" stroke-width="2" opacity="0.85"/>
+  <line x1="760" y1="90" x2="1140" y2="90" stroke="#B8863C" stroke-width="2" opacity="0.85"/>
+  <circle cx="600.0" cy="90" r="6" fill="#B8863C"/>
+  <text x="600.0" y="200" text-anchor="middle" font-family="Snell Roundhand, Apple Chancery, Georgia, serif"
+        font-size="108" fill="url(#txtGrad)">Gottes Segen</text>
+  <text x="600.0" y="288" text-anchor="middle" font-family="Didot, Georgia, serif" font-size="46"
+        letter-spacing="8" fill="#5C3A1E">ZUR KONFIRMATION</text>
+</svg>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Belohnungskarte AR — Sample (Marker 41)</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
+  <script>
+    // --- reward-trigger: sitzt auf dem <a-marker> selbst, hoert auf "markerFound"
+    // und startet/re-startet ALLE Effekt-Layer (Klasse "fx") ueber ein eigenes
+    // lokales Event "fx-restart" (A-Frame animation__* Komponenten hoeren nur auf
+    // ihrem EIGENEN Element — ein Event der Marker-Eltern wuerde nicht "nach unten"
+    // durchgereicht, darum der explizite Relay hier).
+    AFRAME.registerComponent("reward-trigger", {
+      init: function () {
+        var self = this;
+        this.el.addEventListener("markerFound", function () {
+          self.el.querySelectorAll(".fx").forEach(function (el) {
+            el.emit("fx-restart");
+          });
+        });
+      },
+    });
+
+    // --- confetti-emitter: baut beim Laden N Partikel-Planes aus den 18
+    // freigestellten Konfetti-Teilen, mit zufaelliger (aber je Ladevorgang
+    // fester) Flugbahn nach aussen/oben und Fall danach. Re-Start pro Scan
+    // ueber dasselbe "fx-restart"-Event wie alle anderen Layer.
+    AFRAME.registerComponent("confetti-emitter", {
+      schema: { count: { default: 20 } },
+      init: function () {
+        var RATIOS = [
+          69 / 169, 66 / 152, 98 / 122, 63 / 118, 60 / 61, 59 / 60, 58 / 59,
+          51 / 56, 53 / 54, 52 / 53, 51 / 53, 44 / 43, 42 / 42, 42 / 42,
+          41 / 41, 41 / 41, 39 / 41, 40 / 39,
+        ];
+        var n = this.data.count;
+        for (var i = 0; i < n; i++) {
+          var texId = "#konf" + (((i % 18) + 1));
+          var ratio = RATIOS[i % RATIOS.length];
+          var h = 0.075 + Math.random() * 0.025;
+          var w = h * ratio;
+
+          var angle = (i / n) * Math.PI * 2 + (Math.random() * 0.5 - 0.25);
+          var dist = 0.5 + Math.random() * 0.4;
+          var tx = Math.cos(angle) * dist;
+          var tzOut = Math.sin(angle) * dist * 0.4;
+          var upH = 0.32 + Math.random() * 0.34;
+          var fallH = upH - (0.14 + Math.random() * 0.16);
+          var riseDur = Math.round(500 + Math.random() * 250);
+          var fallDur = Math.round(650 + Math.random() * 300);
+          var stagger = Math.round(Math.random() * 320);
+          var spin = Math.random() > 0.5 ? 640 + Math.random() * 240 : -(640 + Math.random() * 240);
+
+          var y0 = 0.05, z0 = 0.02;
+          var y1 = (y0 + upH).toFixed(3), z1 = (z0 + tzOut).toFixed(3);
+          var y2 = (y0 + fallH).toFixed(3), z2 = (z0 + tzOut * 1.2).toFixed(3);
+          var txs = tx.toFixed(3), tx2 = (tx * 1.12).toFixed(3);
+
+          var p = document.createElement("a-entity");
+          p.classList.add("fx");
+          p.setAttribute("geometry", "primitive: plane; width: " + w.toFixed(3) + "; height: " + h.toFixed(3));
+          p.setAttribute("material", "src: " + texId + "; transparent: true; shader: flat; alphaTest: 0.1; side: double");
+          p.setAttribute("position", "0 " + y0 + " " + z0);
+          p.setAttribute("opacity", "0");
+          p.setAttribute("scale", "0.15 0.15 0.15");
+
+          p.setAttribute("animation__scalein",
+            "property: scale; from: 0.15 0.15 0.15; to: 1 1 1; dur: 220; delay: " + stagger +
+            "; easing: easeOutBack; startEvents: fx-restart");
+          p.setAttribute("animation__in",
+            "property: opacity; from: 0; to: 1; dur: 140; delay: " + stagger +
+            "; easing: easeOutQuad; startEvents: fx-restart");
+          p.setAttribute("animation__rise",
+            "property: position; from: 0 " + y0 + " " + z0 + "; to: " + txs + " " + y1 + " " + z1 +
+            "; dur: " + riseDur + "; delay: " + stagger + "; easing: easeOutCubic; startEvents: fx-restart");
+          p.setAttribute("animation__fall",
+            "property: position; from: " + txs + " " + y1 + " " + z1 + "; to: " + tx2 + " " + y2 + " " + z2 +
+            "; dur: " + fallDur + "; delay: " + (stagger + riseDur) + "; easing: easeInQuad; startEvents: fx-restart");
+          p.setAttribute("animation__spin",
+            "property: rotation; from: 0 0 0; to: 0 0 " + spin.toFixed(0) +
+            "; dur: " + (riseDur + fallDur) + "; delay: " + stagger + "; easing: linear; startEvents: fx-restart");
+          p.setAttribute("animation__out",
+            "property: opacity; from: 1; to: 0; dur: 380; delay: " + (stagger + riseDur + fallDur - 340) +
+            "; easing: easeInQuad; startEvents: fx-restart");
+
+          this.el.appendChild(p);
+        }
+      },
+    });
+  </script>
+  <style>
+    body { margin: 0; overflow: hidden; font-family: -apple-system, system-ui, sans-serif; }
+    #hinweis {
+      position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 10;
+      background: rgba(20, 20, 26, .82); color: #fff; padding: .6em 1.1em; border-radius: 999px;
+      font-size: .9rem; max-width: 90vw; text-align: center; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Belohnungskarte · Marker 41 — Karte scannen und ruhig halten. Größe: ?s=1.0</div>
+
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; antialias: true; precision: highp; sortObjects: true"
+    arjs="trackingMethod: best; sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_9_3; debugUIEnabled: false;">
+
+    <a-assets>
+      <img id="tex-pokal" src="elemente/cutout/pokal.png">
+      <img id="tex-burst" src="elemente/cutout/sterneburst.png">
+      <img id="tex-rakete" src="elemente/cutout/rakete.png">
+      <img id="tex-banner" src="elemente/banner.png">
+      <img id="konf1"  src="elemente/cutout/konfetti-teile/teil-01.png">
+      <img id="konf2"  src="elemente/cutout/konfetti-teile/teil-02.png">
+      <img id="konf3"  src="elemente/cutout/konfetti-teile/teil-03.png">
+      <img id="konf4"  src="elemente/cutout/konfetti-teile/teil-04.png">
+      <img id="konf5"  src="elemente/cutout/konfetti-teile/teil-05.png">
+      <img id="konf6"  src="elemente/cutout/konfetti-teile/teil-06.png">
+      <img id="konf7"  src="elemente/cutout/konfetti-teile/teil-07.png">
+      <img id="konf8"  src="elemente/cutout/konfetti-teile/teil-08.png">
+      <img id="konf9"  src="elemente/cutout/konfetti-teile/teil-09.png">
+      <img id="konf10" src="elemente/cutout/konfetti-teile/teil-10.png">
+      <img id="konf11" src="elemente/cutout/konfetti-teile/teil-11.png">
+      <img id="konf12" src="elemente/cutout/konfetti-teile/teil-12.png">
+      <img id="konf13" src="elemente/cutout/konfetti-teile/teil-13.png">
+      <img id="konf14" src="elemente/cutout/konfetti-teile/teil-14.png">
+      <img id="konf15" src="elemente/cutout/konfetti-teile/teil-15.png">
+      <img id="konf16" src="elemente/cutout/konfetti-teile/teil-16.png">
+      <img id="konf17" src="elemente/cutout/konfetti-teile/teil-17.png">
+      <img id="konf18" src="elemente/cutout/konfetti-teile/teil-18.png">
+    </a-assets>
+
+    <!-- Marker 41 = belohnung-pokal (zentrale Registry, _tools/webar-marker-registry) -->
+    <a-marker type="barcode" value="41" reward-trigger>
+      <a-entity id="scene-root" confetti-emitter>
+
+        <!-- L0: Strahlen-Burst — schnelles Aufpoppen + sanftes Pulsieren -->
+        <a-entity class="fx" id="burst"
+          geometry="primitive: plane; width: 0.9; height: 0.998"
+          material="src: #tex-burst; transparent: true; shader: flat; alphaTest: 0.1; side: double"
+          look-at="[camera]"
+          position="0 0.30 0.005" opacity="0" scale="0.05 0.05 0.05"
+          animation__pop="property: scale; from: 0.05 0.05 0.05; to: 1 1 1; dur: 420; delay: 0; easing: easeOutBack; startEvents: fx-restart"
+          animation__in="property: opacity; from: 0; to: 1; dur: 180; delay: 0; easing: easeOutQuad; startEvents: fx-restart"
+          animation__pulse="property: scale; from: 1 1 1; to: 1.07 1.07 1.07; dir: alternate; loop: true; dur: 1100; delay: 420; easing: easeInOutSine; startEvents: fx-restart">
+        </a-entity>
+
+        <!-- L1: Pokal (Hauptmotiv) — federndes Aufpoppen (easeOutElastic), danach Schweben -->
+        <a-entity class="fx" id="pokal-hero"
+          geometry="primitive: plane; width: 0.4425; height: 0.5"
+          material="src: #tex-pokal; transparent: true; shader: flat; alphaTest: 0.1; side: double"
+          look-at="[camera]"
+          position="0 0.28 0.05" opacity="0" scale="0.02 0.02 0.02"
+          animation__pop="property: scale; from: 0.02 0.02 0.02; to: 1 1 1; dur: 900; delay: 160; easing: easeOutElastic; startEvents: fx-restart"
+          animation__in="property: opacity; from: 0; to: 1; dur: 160; delay: 160; easing: easeOutQuad; startEvents: fx-restart"
+          animation__float="property: position; from: 0 0.28 0.05; to: 0 0.335 0.05; dir: alternate; loop: true; dur: 1500; delay: 1060; easing: easeInOutSine; startEvents: fx-restart">
+        </a-entity>
+
+        <!-- Bonus: kleine Rakete schiesst seitlich hoch und weg -->
+        <a-entity class="fx" id="rakete"
+          geometry="primitive: plane; width: 0.20; height: 0.291"
+          material="src: #tex-rakete; transparent: true; shader: flat; alphaTest: 0.1; side: double"
+          look-at="[camera]"
+          position="0.30 0.10 0.03" opacity="0" scale="0.3 0.3 0.3" rotation="0 0 -18"
+          animation__in="property: opacity; from: 0; to: 1; dur: 150; delay: 260; easing: easeOutQuad; startEvents: fx-restart"
+          animation__scale="property: scale; from: 0.3 0.3 0.3; to: 0.55 0.55 0.55; dur: 700; delay: 260; easing: easeOutCubic; startEvents: fx-restart"
+          animation__fly="property: position; from: 0.30 0.10 0.03; to: 0.62 0.95 0.10; dur: 900; delay: 260; easing: easeInCubic; startEvents: fx-restart"
+          animation__out="property: opacity; from: 1; to: 0; dur: 300; delay: 900; easing: easeInQuad; startEvents: fx-restart">
+        </a-entity>
+
+        <!-- L3: Banner — poppt zuletzt ein, liest sich "SUPER GEMACHT!" -->
+        <a-entity class="fx" id="banner-el"
+          geometry="primitive: plane; width: 0.72; height: 0.18"
+          material="src: #tex-banner; transparent: true; shader: flat; alphaTest: 0.1; side: double"
+          look-at="[camera]"
+          position="0 0.64 0.04" opacity="0" scale="0.05 0.05 0.05"
+          animation__pop="property: scale; from: 0.05 0.05 0.05; to: 1 1 1; dur: 500; delay: 980; easing: easeOutBack; startEvents: fx-restart"
+          animation__in="property: opacity; from: 0; to: 1; dur: 180; delay: 980; easing: easeOutQuad; startEvents: fx-restart">
+        </a-entity>
+
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    // ?s=1.2 skaliert die gesamte Effekt-Gruppe (Geraete-Kalibrierung)
+    var f = parseFloat(new URLSearchParams(location.search).get("s"));
+    if (f && f > 0) {
+      window.addEventListener("DOMContentLoaded", function () {
+        var root = document.querySelector("#scene-root");
+        if (root) root.setAttribute("scale", f + " " + f + " " + f);
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="420" viewBox="0 0 1000 420">
+  <defs>
+    <style>
+      .haupt { font-family: "Snell Roundhand", "Apple Chancery", cursive; }
+      .neben { font-family: "Optima", "Baskerville", "Georgia", serif; letter-spacing: 3px; }
+    </style>
+  </defs>
+  <text x="500.0" y="200" class="haupt" font-size="150" fill="#5B3A28" text-anchor="middle">Wir sagen JA!</text>
+  <g>
+    <line x1="240.0" y1="252" x2="470.0" y2="252" stroke="#B8935A" stroke-width="2.4"/>
+    <line x1="530.0" y1="252" x2="760.0" y2="252" stroke="#B8935A" stroke-width="2.4"/>
+    <path d="M 500.0 238 l 16 14 l -16 14 l -16 -14 Z" fill="#B8935A"/>
+  </g>
+  <text x="500.0" y="330" class="neben" font-size="46" fill="#5B3A28" text-anchor="middle">ANNA &amp; MAX · 12.09.2027</text>
+</svg>

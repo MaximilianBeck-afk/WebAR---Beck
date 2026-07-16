@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Konfirmation AR — Sample (Barcode-Marker 39, mehrschichtige Parallax-Szene)</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin:0; overflow:hidden; font-family:-apple-system,system-ui,sans-serif; }
+    #hinweis { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:10;
+      background:rgba(20,20,26,.82); color:#fff; padding:.6em 1em; border-radius:999px;
+      font-size:.9rem; max-width:90vw; text-align:center; pointer-events:none; }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Konfirmations-Sample &middot; Karte 39 ins Bild halten. Gr&ouml;&szlig;e: ?s=1.5</div>
+
+  <!--
+    Koordinaten-Hinweis (Sitzung 173, Konfirmations-Sample):
+    Die Marker-Ebene liegt in AR.js in der XY-Ebene, die lokale Z-Achse zeigt aus der Karte heraus zur Kamera.
+    Darum sind ALLE Schichten unrotiert (rotation="0 0 0") und nur entlang Z gestapelt (0.04 .. 0.95) —
+    das ergibt den flachen, zur Karte parallelen "Decal-Stapel" (echter Parallax-Effekt beim Kippen der Karte),
+    analog zum TECHNIK.md-Schichtenmodell (dort pseudocode mit Y als Höhenachse für ein generisches Y-up-Weltbild;
+    hier auf die tatsächliche, am Gerät geprüfte AR.js-Konvention aus organische-Chemie/v3/index.html übertragen).
+  -->
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; antialias: true; precision: highp; sortObjects: true"
+    arjs="trackingMethod: best; sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_9_3; debugUIEnabled: false;">
+
+    <a-assets timeout="15000">
+      <img id="img-gloriole" src="elemente/gloriole.png">
+      <img id="img-taube" src="elemente/taube.png">
+      <img id="img-kreuz" src="elemente/kreuz-ornament.png">
+      <img id="img-konfetti" src="elemente/bluetenkonfetti.png">
+      <img id="img-regenbogen" src="elemente/regenbogen.png">
+      <img id="img-banner" src="elemente/text-banner.png">
+    </a-assets>
+
+    <a-marker type="barcode" value="39">
+      <!-- Wrapper: traegt die globale ?s=-Skalierung (siehe Script unten) -->
+      <a-entity id="scene-root" class="scene-root" data-base="1" position="0 0 0" scale="1 1 1">
+
+        <!-- L0: Boden-Glow / Gloriole — liegt am naechsten an der Karte, dreht sich langsam -->
+        <a-plane class="layer" src="#img-gloriole" position="0 0.02 0.04" rotation="0 0 0"
+          width="1.7" height="1.7" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double"
+          animation__spin="property: rotation; to: 0 0 360; dur: 16000; loop: true; easing: linear">
+        </a-plane>
+
+        <!-- L1 (Akzent): Regenbogen — dezent, sanftes Wiegen -->
+        <a-plane class="layer" src="#img-regenbogen" position="0 0.30 0.30" rotation="0 0 0"
+          width="0.95" height="0.822" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double" opacity="0.9"
+          animation__sway="property: rotation; dir: alternate; to: 0 0 4; dur: 5200; loop: true; easing: easeInOutSine">
+        </a-plane>
+
+        <!-- L1 (Akzent): Kreuz/Fisch-Ornament — sanftes Atmen (Scale-Puls) -->
+        <a-plane class="layer" src="#img-kreuz" position="-0.62 -0.20 0.34" rotation="0 0 0"
+          width="0.33" height="0.454" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double"
+          animation__breathe="property: scale; dir: alternate; from: 1 1 1; to: 1.1 1.1 1; dur: 3000; loop: true; easing: easeInOutSine">
+        </a-plane>
+
+        <!-- L2: Taube (Hero) — schwebt sanft auf/ab, leichtes Wiegen wie im Gleitflug -->
+        <a-plane class="layer" src="#img-taube" position="0.05 0.05 0.45" rotation="0 0 0"
+          width="0.90" height="0.996" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double"
+          animation__float="property: position; dir: alternate; from: 0.05 0.05 0.45; to: 0.05 0.16 0.45; dur: 2400; loop: true; easing: easeInOutSine"
+          animation__glide="property: rotation; dir: alternate; from: 0 0 -4; to: 0 0 4; dur: 2600; loop: true; easing: easeInOutSine">
+        </a-plane>
+
+        <!-- L3: Bluetenkonfetti-Partikel — drei versetzte kleine Planes, eigene Float-/Puls-Loops -->
+        <a-plane class="layer" src="#img-konfetti" position="-0.55 0.55 0.58" rotation="0 0 0"
+          width="0.32" height="0.32" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double"
+          animation__float1="property: position; dir: alternate; from: -0.55 0.55 0.58; to: -0.55 0.66 0.60; dur: 2100; loop: true; easing: easeInOutSine"
+          animation__pulse1="property: opacity; dir: alternate; from: 1.0; to: 0.55; dur: 1700; loop: true; easing: easeInOutSine">
+        </a-plane>
+        <a-plane class="layer" src="#img-konfetti" position="0.60 0.42 0.62" rotation="0 0 0"
+          width="0.26" height="0.26" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double"
+          animation__float2="property: position; dir: alternate; from: 0.60 0.42 0.62; delay: 350; to: 0.60 0.53 0.64; dur: 2600; loop: true; easing: easeInOutSine"
+          animation__pulse2="property: opacity; dir: alternate; from: 1.0; delay: 350; to: 0.5; dur: 1900; loop: true; easing: easeInOutSine">
+        </a-plane>
+        <a-plane class="layer" src="#img-konfetti" position="0.20 0.68 0.66" rotation="0 0 0"
+          width="0.22" height="0.22" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double"
+          animation__float3="property: position; dir: alternate; from: 0.20 0.68 0.66; delay: 700; to: 0.20 0.78 0.68; dur: 2300; loop: true; easing: easeInOutSine"
+          animation__pulse3="property: opacity; dir: alternate; from: 1.0; delay: 700; to: 0.6; dur: 1500; loop: true; easing: easeInOutSine">
+        </a-plane>
+
+        <!-- L4: Text-Banner "Gottes Segen zur Konfirmation" — oben, leicht geneigt (statisch) -->
+        <a-plane class="layer" src="#img-banner" position="0 0.92 0.80" rotation="-18 0 0"
+          width="1.15" height="0.3258" transparent="true" alpha-test="0.02"
+          material="shader: flat; transparent: true; alphaTest: 0.02; side: double">
+        </a-plane>
+
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    // ?s=1.5 setzt die Start-Groesse der GESAMTEN Szene (Geraete-Kalibrierung)
+    var f = parseFloat(new URLSearchParams(location.search).get('s'));
+    if (f && f > 0) window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.scene-root').forEach(function(root) {
+        var b = parseFloat(root.getAttribute('data-base')) * f;
+        root.setAttribute('scale', b + ' ' + b + ' ' + b);
+      });
+    });
+  </script>
+</body>
+</html>

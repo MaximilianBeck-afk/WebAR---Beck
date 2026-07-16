@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="105mm" height="148mm" viewBox="0 0 1240 1748">
+  <defs>
+    <style>
+      .titel { font-family: "Snell Roundhand", "Apple Chancery", cursive; }
+      .sub   { font-family: "Optima", "Baskerville", "Georgia", serif; letter-spacing: 2px; }
+    </style>
+  </defs>
+
+  <!-- Hintergrund -->
+  <rect x="0" y="0" width="1240" height="1748" fill="#FBF1E7"/>
+
+  <!-- Ziernrahmen: aeussere + innere Linie -->
+  <rect x="52" y="52" width="1136" height="1644" rx="26" ry="26"
+        fill="none" stroke="#B8935A" stroke-width="3.2"/>
+  <rect x="72" y="72" width="1096" height="1604" rx="18" ry="18"
+        fill="none" stroke="#B8935A" stroke-width="1.2"/>
+
+  <!-- Eck-Ornamente (kleine Rauten) -->
+  <g fill="#B8935A">
+    <path d="M 96 96 l 20 20 l -20 20 l -20 -20 Z"/>
+    <path d="M 1144 96 l 20 20 l -20 20 l -20 -20 Z"/>
+    <path d="M 96 1652 l 20 20 l -20 20 l -20 -20 Z"/>
+    <path d="M 1144 1652 l 20 20 l -20 20 l -20 -20 Z"/>
+  </g>
+
+  <!-- Titel -->
+  <text x="620.0" y="300" class="titel" font-size="128" fill="#5B3A28"
+        text-anchor="middle">Hochzeitseinladung</text>
+
+  <!-- Zierlinie mit Mittelraute unter dem Titel -->
+  <g>
+    <line x1="360.0" y1="356" x2="594.0" y2="356" stroke="#B8935A" stroke-width="2"/>
+    <line x1="646.0" y1="356" x2="880.0" y2="356" stroke="#B8935A" stroke-width="2"/>
+    <path d="M 620.0 344 l 14 12 l -14 12 l -14 -12 Z" fill="#8C6A3B"/>
+  </g>
+
+  <!-- Ruhezone (heller, einfarbiger Bereich) um den Marker -->
+  <rect x="240.0" y="494.0" width="760" height="760"
+        fill="#FFFFFF" stroke="#B8935A" stroke-width="1.5"/>
+
+  <!-- Marker 40 (hochzeit-ringe): unverzerrt, quadratisch, Original-PNG der Registry -->
+  <image x="336.5" y="590.5" width="567" height="567"
+         xlink:href="data:image/png;base64,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"
+         preserveAspectRatio="none" image-rendering="pixelated"/>
+
+  <!-- Subtitle unter der Ruhezone -->
+  <text x="620.0" y="1350.0" class="sub" font-size="40" fill="#5B3A28"
+        text-anchor="middle">KARTE SCANNEN &amp; STAUNEN</text>
+
+  <!-- Kleine Zierlinie unter dem Subtitle -->
+  <g>
+    <line x1="440.0" y1="1384.0" x2="594.0" y2="1384.0" stroke="#B8935A" stroke-width="1.6"/>
+    <line x1="646.0" y1="1384.0" x2="800.0" y2="1384.0" stroke="#B8935A" stroke-width="1.6"/>
+    <path d="M 620.0 0" fill="none"/>
+    <circle cx="620.0" cy="1384.0" r="6" fill="#8C6A3B"/>
+  </g>
+</svg>

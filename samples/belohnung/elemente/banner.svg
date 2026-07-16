@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300">
+  <defs>
+    <linearGradient id="banner-fill" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FF6FA0"/>
+      <stop offset="100%" stop-color="#FF3D78"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Banner-Grundform: abgerundete Pille im Sticker-Look (dicker weisser Rand) -->
+  <rect x="34" y="34" width="1132" height="232" rx="116" ry="116"
+        fill="url(#banner-fill)" stroke="#FFFFFF" stroke-width="20"/>
+  <rect x="34" y="34" width="1132" height="232" rx="116" ry="116"
+        fill="none" stroke="#B3184F" stroke-width="4" opacity="0.5"/>
+
+  <!-- Sterne links/rechts -->
+  <polygon points="96.0,112.0 105.4,137.1 132.1,138.3 111.2,154.9 118.3,180.7 96.0,166.0 73.7,180.7 80.8,154.9 59.9,138.3 86.6,137.1" fill="#FFD400" stroke="#FFFFFF" stroke-width="7"/>
+  <polygon points="1104.0,112.0 1113.4,137.1 1140.1,138.3 1119.2,154.9 1126.3,180.7 1104.0,166.0 1081.7,180.7 1088.8,154.9 1067.9,138.3 1094.6,137.1" fill="#FFD400" stroke="#FFFFFF" stroke-width="7"/>
+
+  <!-- Text: deterministisch, keine KI-Schrift -->
+  <text x="600.0" y="184.0" text-anchor="middle"
+        font-family="Arial Rounded MT Bold, Arial Black, sans-serif"
+        font-size="86" fill="#FFFFFF" stroke="#B3184F" stroke-width="6"
+        paint-order="stroke" letter-spacing="1">SUPER GEMACHT!</text>
+</svg>

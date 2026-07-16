@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>WebAR-Sample — Hochzeitseinladung (Barcode-Marker 40, mehrschichtig animiert)</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
+  <style>
+    body { margin:0; overflow:hidden; font-family:-apple-system,system-ui,sans-serif; }
+    #hinweis { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:10;
+      background:rgba(20,20,26,.82); color:#fff; padding:.6em 1em; border-radius:999px;
+      font-size:.9rem; max-width:90vw; text-align:center; pointer-events:none; }
+  </style>
+</head>
+<body>
+  <div id="hinweis">Sample „Hochzeitseinladung" · Marker 40 · Größe justieren: ?s=1.5</div>
+
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; antialias: true; precision: highp; sortObjects: true"
+    arjs="trackingMethod: best; sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_9_3; debugUIEnabled: false;">
+
+    <a-assets>
+      <img id="tex_glow"     src="elemente/glow.png">
+      <img id="tex_ranken"   src="elemente/ranken.png">
+      <img id="tex_ringe"    src="elemente/ringe.png">
+      <img id="tex_herz"     src="elemente/herz.png">
+      <img id="tex_partikel" src="elemente/partikel.png">
+      <img id="tex_banner"   src="elemente/banner.png">
+    </a-assets>
+
+    <!-- Marker 40 = hochzeit-ringe (zentrale Registry, _tools/webar-marker-registry) -->
+    <a-marker type="barcode" value="40">
+
+      <!-- L0 — Licht-/Glow-Schleier: warmer Untergrund-Schimmer, langsames Pulsieren -->
+      <a-plane class="layer" data-base="1.7" src="#tex_glow"
+        width="1" height="1" position="0 0 0.02" rotation="0 0 0"
+        material="shader: flat; transparent: true; alphaTest: 0.02; side: double; opacity: 0.55"
+        animation__puls="property: material.opacity; dir: alternate; loop: true; dur: 4200; easing: easeInOutSine; from: 0.35; to: 0.62">
+      </a-plane>
+
+      <!-- L1 — Ranken-Bogen: statischer Rahmen, spannt sich über den Marker -->
+      <a-plane class="layer" data-base="1.35" src="#tex_ranken"
+        width="1.488" height="1" position="0 0 0.06" rotation="0 0 0"
+        material="shader: flat; transparent: true; alphaTest: 0.08; side: double">
+      </a-plane>
+
+      <!-- L2 — Ringe (Hero): Schweben + langsame Y-Rotation -->
+      <a-plane class="layer" data-base="0.55" src="#tex_ringe"
+        width="1" height="1" position="0 0 0.26" rotation="0 0 0"
+        material="shader: flat; transparent: true; alphaTest: 0.08; side: double"
+        animation__schweben="property: position; dir: alternate; loop: true; dur: 2600; easing: easeInOutSine; from: 0 0 0.22; to: 0 0 0.32"
+        animation__drehen="property: rotation; loop: true; dur: 9000; easing: linear; from: 0 0 0; to: 0 360 0">
+      </a-plane>
+
+      <!-- L3 — Herz-Ornament: Akzent seitlich versetzt, Herzschlag-Puls + sehr langsame Eigendrehung -->
+      <a-plane class="layer" data-base="0.34" src="#tex_herz"
+        width="1" height="1" position="0.42 -0.05 0.46" rotation="0 0 0"
+        material="shader: flat; transparent: true; alphaTest: 0.08; side: double"
+        animation__puls="property: scale; dir: alternate; loop: true; dur: 1300; easing: easeInOutSine; from: 0.34 0.34 0.34; to: 0.39 0.39 0.39"
+        animation__drehen="property: rotation; loop: true; dur: 16000; easing: linear; from: 0 0 0; to: 0 0 360">
+      </a-plane>
+
+      <!-- L4 — Partikel-Ebene: fallende Rosenblätter/Bokeh, 3 versetzte Instanzen (Höhe = Z, faellt von hoch nach niedrig) -->
+      <a-plane class="layer" data-base="0.30" src="#tex_partikel"
+        width="1" height="1" position="-0.38 0 0.9" rotation="0 0 0"
+        material="shader: flat; transparent: true; alphaTest: 0.05; side: double; opacity: 0.9"
+        animation__fallen="property: position; loop: true; dur: 7000; easing: linear; from: -0.38 0 0.95; to: -0.38 0 0.30"
+        animation__fade="property: material.opacity; dir: alternate; loop: true; dur: 3500; easing: easeInOutSine; from: 0.15; to: 0.9">
+      </a-plane>
+      <a-plane class="layer" data-base="0.24" src="#tex_partikel"
+        width="1" height="1" position="0.1 0.08 0.95" rotation="0 0 25"
+        material="shader: flat; transparent: true; alphaTest: 0.05; side: double; opacity: 0.9"
+        animation__fallen="property: position; loop: true; dur: 8200; delay: 1800; easing: linear; from: 0.1 0.08 1.0; to: 0.1 0.08 0.30"
+        animation__fade="property: material.opacity; dir: alternate; loop: true; dur: 4100; delay: 400; easing: easeInOutSine; from: 0.12; to: 0.85">
+      </a-plane>
+      <a-plane class="layer" data-base="0.27" src="#tex_partikel"
+        width="1" height="1" position="0.4 -0.1 0.85" rotation="0 0 -18"
+        material="shader: flat; transparent: true; alphaTest: 0.05; side: double; opacity: 0.9"
+        animation__fallen="property: position; loop: true; dur: 6400; delay: 3200; easing: linear; from: 0.4 -0.1 0.9; to: 0.4 -0.1 0.28"
+        animation__fade="property: material.opacity; dir: alternate; loop: true; dur: 3200; delay: 900; easing: easeInOutSine; from: 0.1; to: 0.88">
+      </a-plane>
+
+      <!-- L5 — Text-Banner: oberste Ebene, sanftes Schweben -->
+      <a-plane class="layer" data-base="0.62" src="#tex_banner"
+        width="1" height="0.29" position="0 0.02 1.05" rotation="0 0 0"
+        material="shader: flat; transparent: true; alphaTest: 0.08; side: double"
+        animation__schweben="property: position; dir: alternate; loop: true; dur: 3400; easing: easeInOutSine; from: 0 0.02 1.02; to: 0 0.02 1.09">
+      </a-plane>
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    // ?s=1.5 setzt die Start-Groesse ALLER Schichten (Geraete-Kalibrierung)
+    var f = parseFloat(new URLSearchParams(location.search).get('s'));
+    if (f && f > 0) window.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.layer').forEach(function(el) {
+        var b = parseFloat(el.getAttribute('data-base')) * f;
+        el.setAttribute('scale', b + ' ' + b + ' ' + b);
+      });
+    });
+  </script>
+</body>
+</html>

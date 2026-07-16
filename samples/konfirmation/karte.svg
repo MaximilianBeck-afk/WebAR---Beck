@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="105mm" height="148mm" viewBox="0 0 1240 1748">
+  <defs>
+    <linearGradient id="bandGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E9CE93"/>
+      <stop offset="1" stop-color="#C9A24B"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Grundfläche -->
+  <rect x="0" y="0" width="1240" height="1748" fill="#F7F1E1"/>
+
+  <!-- Dezenter Rahmen -->
+  <rect x="30" y="30" width="1180" height="1688" rx="26" ry="26" fill="#FBF7EC" stroke="#241A12" stroke-width="6"/>
+  <rect x="52" y="52" width="1136" height="1644" rx="16" ry="16" fill="none" stroke="#B8863C" stroke-width="2.5"/>
+  <rect x="64" y="64" width="1112" height="1620" rx="12" ry="12" fill="none" stroke="#B8863C" stroke-width="1" opacity="0.5"/>
+
+  <!-- Ecken-Ornamente (weit weg von der Marker-Ruhezone) -->
+  <circle cx="100" cy="100" r="7" fill="#B8863C"/>
+  <circle cx="1140" cy="100" r="7" fill="#B8863C"/>
+  <circle cx="100" cy="1648" r="7" fill="#B8863C"/>
+  <circle cx="1140" cy="1648" r="7" fill="#B8863C"/>
+
+  <!-- Titel -->
+  <text x="620.0" y="245" text-anchor="middle" font-family="Didot, Georgia, serif" font-size="108"
+        letter-spacing="4" fill="#241A12">Konfirmation</text>
+  <line x1="360.0" y1="288" x2="880.0" y2="288" stroke="#B8863C" stroke-width="2"/>
+  <text x="620.0" y="336" text-anchor="middle" font-family="Snell Roundhand, Georgia, serif" font-size="40"
+        fill="#B8863C">Gottes Segen zu deinem Tag</text>
+
+  <!-- Ruhezone (Pflicht fürs Tracking): plane einfarbige Fläche, nichts überlagert sie -->
+  <rect x="240.0" y="520.0" width="760" height="760" fill="#F7F1E1"/>
+
+  <!-- Marker 39 (braun-Schema, Registry-Original) -->
+  <g transform="translate(336.50 616.50) scale(47.2500)">
+  <rect x="0" y="0" width="12" height="12" fill="#F7F1E1"/>
+  <rect x="2" y="2" width="8" height="8" fill="#241A12"/>
+  <rect x="5" y="4" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="6" y="4" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="7" y="4" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="5" y="5" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="6" y="5" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="6" y="6" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="7" y="6" width="1" height="1" fill="#F7F1E1"/>
+  <rect x="7" y="7" width="1" height="1" fill="#F7F1E1"/>
+  </g>
+
+  <!-- Subline unter dem Marker -->
+  <text x="620.0" y="1355" text-anchor="middle" font-family="Snell Roundhand, Georgia, serif" font-size="52"
+        fill="#241A12">Karte scannen &amp; staunen</text>
+
+  <!-- Fußzeile -->
+  <line x1="400.0" y1="1420" x2="840.0" y2="1420" stroke="#B8863C" stroke-width="1.5" opacity="0.8"/>
+  <text x="620.0" y="1470" text-anchor="middle" font-family="Georgia, serif" font-size="24" letter-spacing="3"
+        fill="#B8863C">KONFIRMATION &#183; WEBAR-GRUSSKARTE</text>
+</svg>

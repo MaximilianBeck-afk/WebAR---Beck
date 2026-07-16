@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1240" height="1748" viewBox="0 0 1240 1748">
+<defs>
+    <linearGradient id="bg-grad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFF7EA"/>
+      <stop offset="100%" stop-color="#FFEFF6"/>
+    </linearGradient>
+  </defs>
+<rect x="0" y="0" width="1240" height="1748" fill="url(#bg-grad)"/>
+<rect x="26" y="26" width="1188" height="1696" rx="46" ry="46" fill="none" stroke="#FFC93C" stroke-width="10"/>
+<rect x="46" y="46" width="1148" height="1656" rx="34" ry="34" fill="none" stroke="#FF8FB1" stroke-width="4" opacity="0.8"/>
+<text x="620.0" y="215" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial Black, sans-serif" font-size="112" fill="#FF3D78" stroke="#7A1339" stroke-width="5" paint-order="stroke">Belohnungskarte</text>
+<text x="620.0" y="300" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial Black, sans-serif" font-size="54" fill="#3A2E22">Scannen &amp; feiern!</text>
+<circle cx="360.0" cy="330" r="10" fill="#FFC93C"/>
+<circle cx="880.0" cy="330" r="10" fill="#FFC93C"/>
+<rect x="206.6" y="574.2" width="826.8" height="826.8" rx="28" ry="28" fill="#FFFDF8" stroke="#39C5BB" stroke-width="6"/>
+<g transform="translate(336.54,704.16) scale(47.24409)" shape-rendering="crispEdges">
+<rect x="0" y="0" width="12" height="12" fill="#F7F1E1"/>
+<rect x="2" y="2" width="8" height="8" fill="#241A12"/>
+<rect x="5" y="4" width="1" height="1" fill="#F7F1E1"/>
+<rect x="6" y="4" width="1" height="1" fill="#F7F1E1"/>
+<rect x="7" y="4" width="1" height="1" fill="#F7F1E1"/>
+<rect x="5" y="5" width="1" height="1" fill="#F7F1E1"/>
+<rect x="7" y="5" width="1" height="1" fill="#F7F1E1"/>
+<rect x="4" y="6" width="1" height="1" fill="#F7F1E1"/>
+<rect x="6" y="6" width="1" height="1" fill="#F7F1E1"/>
+<rect x="7" y="6" width="1" height="1" fill="#F7F1E1"/>
+<rect x="6" y="7" width="1" height="1" fill="#F7F1E1"/>
+<rect x="7" y="7" width="1" height="1" fill="#F7F1E1"/>
+</g>
+<image href="elemente/cutout/pokal.png" x="70.0" y="1443.9" width="190.0" height="214.1" preserveAspectRatio="xMidYMid meet"/>
+<image href="elemente/cutout/sterneburst.png" x="1010.0" y="1459.6" width="170.0" height="188.4" preserveAspectRatio="xMidYMid meet"/>
+<image href="elemente/cutout/rakete.png" x="60.0" y="360.0" width="140.0" height="203.7" preserveAspectRatio="xMidYMid meet"/>
+<image href="elemente/cutout/konfetti-teile/teil-05.png" x="1070.0" y="380.0" width="70.0" height="71.0" preserveAspectRatio="xMidYMid meet"/>
+<image href="elemente/cutout/konfetti-teile/teil-09.png" x="980.0" y="470.0" width="60.0" height="61.0" preserveAspectRatio="xMidYMid meet"/>
+<image href="elemente/cutout/konfetti-teile/teil-13.png" x="200.0" y="470.0" width="55.0" height="55.0" preserveAspectRatio="xMidYMid meet"/>
+<image href="elemente/cutout/konfetti-teile/teil-03.png" x="1030.0" y="1488.0" width="82.0" height="102.0" preserveAspectRatio="xMidYMid meet"/>
+<text x="620.0" y="1688" text-anchor="middle" font-family="Arial Rounded MT Bold, Arial Black, sans-serif" font-size="30" fill="#3A2E22" opacity="0.75">Marker-ID 41 · AR-Belohnungssticker — Muster</text>
+</svg>
