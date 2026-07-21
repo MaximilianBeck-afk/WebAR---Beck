@@ -2,3 +2,7 @@
 *.pdf
 render_karte.py
 ANLEITUNG.md
+
+# Interne Build-/Quell-Ordner (nicht deployen) — S188
+hero-a-veresterung/
+pilot-testkarten/
