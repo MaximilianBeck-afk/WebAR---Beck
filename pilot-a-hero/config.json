@@ -1,0 +1,57 @@
+{
+  "id": "pilot-a-hero",
+  "titel": "Pilot A — Hero-Erlebnis „Ethansäure erkunden“",
+  "marker": { "typ": "barcode", "wert": 43 },
+  "modell": {
+    "src": "models/ethansaeure.glb",
+    "position": "0 0 0.3",
+    "basis_skalierung": 0.5
+  },
+  "hinweis": "Kamera auf die Karte richten · Menü oben wählen · Molekül-Teile antippen",
+  "start_kapitel": "uebersicht",
+  "kapitel": [
+    { "id": "uebersicht", "titel": "Übersicht" },
+    { "id": "saeure", "titel": "Säuregruppe" },
+    { "id": "rest", "titel": "Methylrest" },
+    { "id": "alle", "titel": "Beschriftung", "beschriftung": true }
+  ],
+  "mesh_hotspots": [
+    {
+      "id": "carbonyl",
+      "knoten": ["O_2", "B1a", "B1b"],
+      "titel": "Carbonylgruppe (C=O)",
+      "text": "Die C=O-Doppelbindung ist stark polar. Das positivierte C-Atom ist das Angriffsziel bei Additions- und Substitutions-Reaktionen (z. B. Veresterung).",
+      "label": "C=O",
+      "farbe": "#ffb03a",
+      "kapitel": "saeure"
+    },
+    {
+      "id": "hydroxy",
+      "knoten": ["O_3", "H_7", "B6"],
+      "titel": "Hydroxygruppe (O–H)",
+      "text": "Über diese O–H-Bindung wird das Proton abgegeben. Der zurückbleibende Carboxylat-Rest wird durch Mesomerie stabilisiert.",
+      "label": "O–H",
+      "farbe": "#ff7ab0",
+      "kapitel": "saeure"
+    },
+    {
+      "id": "carboxy",
+      "knoten": ["C_1", "B0", "B2"],
+      "titel": "Carboxygruppe (–COOH)",
+      "text": "Die funktionelle Gruppe der Carbonsäuren. Sie besteht aus einer Carbonyl- (C=O) und einer Hydroxygruppe (O–H) am selben C-Atom und gibt in Wasser ein Proton ab.",
+      "fakt": "Wusstest du? Deshalb reagiert Ethansäure sauer — verdünnt (ca. 5 %) kennst du sie als Speiseessig.",
+      "label": "–COOH",
+      "farbe": "#ff4d67",
+      "kapitel": "saeure"
+    },
+    {
+      "id": "methyl",
+      "knoten": ["C_0", "H_4", "H_5", "H_6", "B3", "B4", "B5"],
+      "titel": "Methylgruppe (–CH₃)",
+      "text": "Der unpolare Kohlenwasserstoff-Rest. Er beeinflusst die Säurestärke nur schwach — die Reaktivität sitzt in der Carboxygruppe.",
+      "label": "–CH₃",
+      "farbe": "#4db6ff",
+      "kapitel": "rest"
+    }
+  ]
+}

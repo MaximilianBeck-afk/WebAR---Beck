@@ -1,0 +1,79 @@
+{
+  "id": "hero-veresterung",
+  "titel": "Veresterung erleben — Ethansäure + Ethanol",
+  "marker": { "typ": "barcode", "wert": 44 },
+  "modell": {
+    "src": "models/veresterung.glb",
+    "position": "0 0 0.3",
+    "basis_skalierung": 0.2
+  },
+  "hinweis": "Kamera auf die Karte richten · Kapitel oben wählen · Molekül-Teile antippen",
+  "start_kapitel": "uebersicht",
+  "animation": { "replay_titel": "⟳ Reaktion nochmal" },
+  "kapitel": [
+    { "id": "uebersicht", "titel": "Übersicht", "anim": "start" },
+    { "id": "saeure", "titel": "Ethansäure", "anim": "start", "beschriftung": true },
+    { "id": "alkohol", "titel": "Ethanol", "anim": "start", "beschriftung": true },
+    { "id": "reaktion", "titel": "▶ Reaktion", "anim": "abspielen" },
+    { "id": "produkt", "titel": "Produkt", "anim": "ende", "beschriftung": true }
+  ],
+  "mesh_hotspots": [
+    {
+      "id": "carboxy",
+      "knoten": ["A_Cc", "A_Oc", "A_Oh", "A_Ho", "B_Cc_Oc_*", "B_Cc_Oh_*", "B_Ho_Oh_*"],
+      "titel": "Carboxygruppe (–COOH)",
+      "text": "Die funktionelle Gruppe der Carbonsäuren. Ihr Carbonyl-C-Atom ist positiviert — genau hier greift bei der Veresterung das Sauerstoff-Atom des Alkohols an.",
+      "fakt": "Wusstest du? Verdünnte Ethansäure (ca. 5 %) kennst du als Speiseessig.",
+      "label": "–COOH",
+      "farbe": "#ff4d67",
+      "kapitel": "saeure"
+    },
+    {
+      "id": "methyl",
+      "knoten": ["A_Cm", "A_Ha1", "A_Ha2", "A_Ha3", "B_Cc_Cm_*", "B_Cm_Ha1_*", "B_Cm_Ha2_*", "B_Cm_Ha3_*"],
+      "titel": "Methylgruppe (–CH₃)",
+      "text": "Der unpolare Rest der Ethansäure. An der Reaktion ist er nicht beteiligt — er wandert unverändert in den Ester.",
+      "label": "–CH₃",
+      "farbe": "#4db6ff",
+      "kapitel": "saeure"
+    },
+    {
+      "id": "hydroxy",
+      "knoten": ["A_Oe", "A_He", "B_He_Oe_*"],
+      "titel": "Hydroxygruppe (–OH) des Ethanols",
+      "text": "Die funktionelle Gruppe der Alkanole. Ihr Sauerstoff-Atom greift das Carbonyl-C der Säure an; ihr Wasserstoff-Atom wird bei der Kondensation an die Säure-OH-Gruppe abgegeben.",
+      "label": "–OH",
+      "farbe": "#ff7ab0",
+      "kapitel": "alkohol"
+    },
+    {
+      "id": "ethyl",
+      "knoten": ["A_C2e", "A_C1e", "A_He1", "A_He2", "A_He3", "A_He4", "A_He5", "B_C1e_C2e_*", "B_C1e_He1_*", "B_C1e_He2_*", "B_C2e_He3_*", "B_C2e_He4_*", "B_C2e_He5_*"],
+      "titel": "Ethyl-Grundgerüst (–C₂H₅)",
+      "text": "Der unpolare Kohlenwasserstoff-Rest des Ethanols. Er bleibt bei der Reaktion unverändert und bildet später den Alkohol-Teil des Esters.",
+      "label": "–C₂H₅",
+      "farbe": "#4db6ff",
+      "kapitel": "alkohol"
+    },
+    {
+      "id": "ester",
+      "knoten": ["A_Oe", "A_Cc", "A_Oc", "B_Cc_Oe_*"],
+      "titel": "Estergruppe (–COO–)",
+      "text": "Die neue Bindung: Das Sauerstoff-Atom des Alkohols verbindet jetzt beide Molekül-Teile. Entstanden ist Essigsäureethylester (Ethylacetat) — erkennbar an der C–O–C-Brücke neben dem Carbonyl.",
+      "fakt": "Wusstest du? Ethylacetat riecht fruchtig und steckt als Lösungsmittel in Klebstoff und Nagellackentferner.",
+      "label": "–COO–",
+      "farbe": "#ffb03a",
+      "kapitel": "produkt"
+    },
+    {
+      "id": "wasser",
+      "knoten": ["A_Oh", "A_Ho", "A_He", "B_He_Oh_*", "B_Ho_Oh_*"],
+      "titel": "Wasser (H₂O)",
+      "text": "Das Kondensations-Produkt: Die OH-Gruppe der Säure und das H-Atom des Alkohols spalten sich gemeinsam als Wasser ab. Deshalb heißt die Veresterung eine Kondensationsreaktion.",
+      "fakt": "Die Rückreaktion gibt es auch: Mit Wasser zerfällt der Ester wieder — die Veresterung ist eine Gleichgewichtsreaktion.",
+      "label": "H₂O",
+      "farbe": "#7ad0ff",
+      "kapitel": "produkt"
+    }
+  ]
+}

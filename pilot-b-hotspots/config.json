@@ -1,0 +1,28 @@
+{
+  "id": "pilot-b-hotspots",
+  "titel": "Pilot B — Tap-Hotspots (inkrementelles Upgrade)",
+  "marker": { "typ": "barcode", "wert": 42 },
+  "modell": {
+    "src": "models/ethanol.glb",
+    "position": "0 0 0.3",
+    "basis_skalierung": 0.45
+  },
+  "hinweis": "Kamera auf die Karte richten · Punkte antippen · 1 Finger drehen · 2 Finger zoomen",
+  "punkt_hotspots": [
+    {
+      "position": "0.7 0.45 0",
+      "titel": "Hydroxygruppe (–OH)",
+      "text": "Die funktionelle Gruppe der Alkanole. Das Sauerstoff-Atom zieht die Bindungselektronen an sich — dadurch bildet Ethanol Wasserstoffbrücken und ist gut wasserlöslich.",
+      "fakt": "Wusstest du? Wird die Hydroxygruppe oxidiert, entsteht aus Ethanol zunächst Ethanal und dann Ethansäure.",
+      "label": "–OH",
+      "farbe": "#ff4d67"
+    },
+    {
+      "position": "-0.8 -0.2 0",
+      "titel": "Ethyl-Grundgerüst (–C₂H₅)",
+      "text": "Der unpolare Kohlenwasserstoff-Rest aus zwei C-Atomen. Er ist hydrophob — je länger dieser Rest, desto schlechter löst sich das Alkanol in Wasser.",
+      "label": "–C₂H₅",
+      "farbe": "#4db6ff"
+    }
+  ]
+}
