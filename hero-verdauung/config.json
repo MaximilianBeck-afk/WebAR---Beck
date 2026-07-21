@@ -1,0 +1,753 @@
+{
+  "id": "hero-verdauung",
+  "titel": "Verdauungssystem — der Weg der Nahrung",
+  "marker": {
+    "typ": "barcode",
+    "wert": 46
+  },
+  "modell": {
+    "src": "models/verdauung.glb",
+    "position": "0 0 0.3",
+    "basis_skalierung": 0.22
+  },
+  "hinweis": "Kamera auf die Karte richten · Kapitel oben wählen · Organe antippen",
+  "start_kapitel": "uebersicht",
+  "route": {
+    "replay_titel": "⟳ Ablauf nochmal",
+    "dauer": 15,
+    "radius": 0.085,
+    "farbe": "#ffcf4d",
+    "punkte": [
+      [
+        0.0,
+        2.4,
+        -0.0
+      ],
+      [
+        0.0,
+        2.17,
+        -0.0
+      ],
+      [
+        0.0,
+        1.87,
+        -0.0
+      ],
+      [
+        0.0,
+        1.57,
+        -0.0
+      ],
+      [
+        0.0,
+        1.27,
+        -0.0
+      ],
+      [
+        -0.019,
+        1.161,
+        -0.0
+      ],
+      [
+        -0.077,
+        1.091,
+        -0.0
+      ],
+      [
+        -0.1,
+        1.05,
+        -0.0
+      ],
+      [
+        -0.56,
+        0.83,
+        -0.0
+      ],
+      [
+        -0.44,
+        0.25,
+        -0.0
+      ],
+      [
+        0.11,
+        0.4,
+        -0.0
+      ],
+      [
+        0.161,
+        0.356,
+        -0.0
+      ],
+      [
+        0.231,
+        0.242,
+        -0.0
+      ],
+      [
+        0.256,
+        0.111,
+        -0.0
+      ],
+      [
+        0.24,
+        -0.019,
+        -0.0
+      ],
+      [
+        0.183,
+        -0.128,
+        -0.0
+      ],
+      [
+        0.074,
+        -0.186,
+        -0.0
+      ],
+      [
+        -0.055,
+        -0.195,
+        -0.0
+      ],
+      [
+        -0.179,
+        -0.173,
+        -0.0
+      ],
+      [
+        -0.304,
+        -0.152,
+        -0.0
+      ],
+      [
+        -0.384,
+        -0.164,
+        -0.0
+      ],
+      [
+        -0.4,
+        -0.19,
+        -0.0
+      ],
+      [
+        -0.3,
+        -0.164,
+        -0.035
+      ],
+      [
+        -0.2,
+        -0.17,
+        -0.05
+      ],
+      [
+        -0.1,
+        -0.201,
+        -0.035
+      ],
+      [
+        0.0,
+        -0.218,
+        -0.0
+      ],
+      [
+        0.1,
+        -0.201,
+        0.035
+      ],
+      [
+        0.2,
+        -0.17,
+        0.05
+      ],
+      [
+        0.3,
+        -0.164,
+        0.035
+      ],
+      [
+        0.4,
+        -0.19,
+        0.0
+      ],
+      [
+        0.447,
+        -0.205,
+        -0.0
+      ],
+      [
+        0.476,
+        -0.245,
+        -0.0
+      ],
+      [
+        0.476,
+        -0.295,
+        -0.0
+      ],
+      [
+        0.447,
+        -0.335,
+        -0.0
+      ],
+      [
+        0.4,
+        -0.35,
+        -0.0
+      ],
+      [
+        0.3,
+        -0.324,
+        0.035
+      ],
+      [
+        0.2,
+        -0.33,
+        0.05
+      ],
+      [
+        0.1,
+        -0.361,
+        0.035
+      ],
+      [
+        0.0,
+        -0.378,
+        0.0
+      ],
+      [
+        -0.1,
+        -0.361,
+        -0.035
+      ],
+      [
+        -0.2,
+        -0.33,
+        -0.05
+      ],
+      [
+        -0.3,
+        -0.324,
+        -0.035
+      ],
+      [
+        -0.4,
+        -0.35,
+        -0.0
+      ],
+      [
+        -0.447,
+        -0.365,
+        -0.0
+      ],
+      [
+        -0.476,
+        -0.405,
+        -0.0
+      ],
+      [
+        -0.476,
+        -0.455,
+        -0.0
+      ],
+      [
+        -0.447,
+        -0.495,
+        -0.0
+      ],
+      [
+        -0.4,
+        -0.51,
+        -0.0
+      ],
+      [
+        -0.3,
+        -0.484,
+        -0.035
+      ],
+      [
+        -0.2,
+        -0.49,
+        -0.05
+      ],
+      [
+        -0.1,
+        -0.521,
+        -0.035
+      ],
+      [
+        0.0,
+        -0.538,
+        -0.0
+      ],
+      [
+        0.1,
+        -0.521,
+        0.035
+      ],
+      [
+        0.2,
+        -0.49,
+        0.05
+      ],
+      [
+        0.3,
+        -0.484,
+        0.035
+      ],
+      [
+        0.4,
+        -0.51,
+        0.0
+      ],
+      [
+        0.447,
+        -0.525,
+        -0.0
+      ],
+      [
+        0.476,
+        -0.565,
+        -0.0
+      ],
+      [
+        0.476,
+        -0.615,
+        -0.0
+      ],
+      [
+        0.447,
+        -0.655,
+        -0.0
+      ],
+      [
+        0.4,
+        -0.67,
+        -0.0
+      ],
+      [
+        0.3,
+        -0.644,
+        0.035
+      ],
+      [
+        0.2,
+        -0.65,
+        0.05
+      ],
+      [
+        0.1,
+        -0.681,
+        0.035
+      ],
+      [
+        0.0,
+        -0.698,
+        0.0
+      ],
+      [
+        -0.1,
+        -0.681,
+        -0.035
+      ],
+      [
+        -0.2,
+        -0.65,
+        -0.05
+      ],
+      [
+        -0.3,
+        -0.644,
+        -0.035
+      ],
+      [
+        -0.4,
+        -0.67,
+        -0.0
+      ],
+      [
+        -0.447,
+        -0.685,
+        -0.0
+      ],
+      [
+        -0.476,
+        -0.725,
+        -0.0
+      ],
+      [
+        -0.476,
+        -0.775,
+        -0.0
+      ],
+      [
+        -0.447,
+        -0.815,
+        -0.0
+      ],
+      [
+        -0.4,
+        -0.83,
+        -0.0
+      ],
+      [
+        -0.3,
+        -0.804,
+        -0.035
+      ],
+      [
+        -0.2,
+        -0.81,
+        -0.05
+      ],
+      [
+        -0.1,
+        -0.841,
+        -0.035
+      ],
+      [
+        0.0,
+        -0.858,
+        -0.0
+      ],
+      [
+        0.1,
+        -0.841,
+        0.035
+      ],
+      [
+        0.2,
+        -0.81,
+        0.05
+      ],
+      [
+        0.3,
+        -0.804,
+        0.035
+      ],
+      [
+        0.4,
+        -0.83,
+        0.0
+      ],
+      [
+        0.442,
+        -0.883,
+        -0.0
+      ],
+      [
+        0.462,
+        -0.937,
+        -0.0
+      ],
+      [
+        0.46,
+        -0.99,
+        -0.0
+      ],
+      [
+        0.484,
+        -1.073,
+        -0.0
+      ],
+      [
+        0.555,
+        -1.175,
+        -0.0
+      ],
+      [
+        0.657,
+        -1.193,
+        -0.0
+      ],
+      [
+        0.72,
+        -1.021,
+        -0.0
+      ],
+      [
+        0.72,
+        -0.723,
+        -0.0
+      ],
+      [
+        0.72,
+        -0.426,
+        -0.0
+      ],
+      [
+        0.72,
+        -0.128,
+        -0.0
+      ],
+      [
+        0.72,
+        0.17,
+        -0.0
+      ],
+      [
+        0.702,
+        0.259,
+        -0.0
+      ],
+      [
+        0.649,
+        0.312,
+        -0.0
+      ],
+      [
+        0.56,
+        0.33,
+        -0.0
+      ],
+      [
+        0.424,
+        0.286,
+        -0.0
+      ],
+      [
+        0.264,
+        0.257,
+        -0.0
+      ],
+      [
+        0.09,
+        0.242,
+        -0.0
+      ],
+      [
+        -0.09,
+        0.242,
+        -0.0
+      ],
+      [
+        -0.264,
+        0.257,
+        -0.0
+      ],
+      [
+        -0.424,
+        0.286,
+        -0.0
+      ],
+      [
+        -0.56,
+        0.33,
+        -0.0
+      ],
+      [
+        -0.649,
+        0.312,
+        -0.0
+      ],
+      [
+        -0.702,
+        0.259,
+        -0.0
+      ],
+      [
+        -0.72,
+        0.17,
+        -0.0
+      ],
+      [
+        -0.72,
+        -0.123,
+        -0.0
+      ],
+      [
+        -0.72,
+        -0.417,
+        -0.0
+      ],
+      [
+        -0.72,
+        -0.71,
+        -0.0
+      ],
+      [
+        -0.72,
+        -1.003,
+        -0.0
+      ],
+      [
+        -0.708,
+        -1.228,
+        -0.0
+      ],
+      [
+        -0.633,
+        -1.324,
+        -0.0
+      ],
+      [
+        -0.527,
+        -1.377,
+        -0.0
+      ],
+      [
+        -0.439,
+        -1.428,
+        -0.0
+      ],
+      [
+        -0.414,
+        -1.518,
+        -0.0
+      ],
+      [
+        -0.381,
+        -1.617,
+        -0.0
+      ],
+      [
+        -0.266,
+        -1.657,
+        -0.0
+      ],
+      [
+        -0.156,
+        -1.677,
+        -0.0
+      ],
+      [
+        -0.051,
+        -1.678,
+        -0.0
+      ],
+      [
+        0.0,
+        -1.67,
+        -0.0
+      ],
+      [
+        0.0,
+        -1.894,
+        -0.0
+      ],
+      [
+        0.0,
+        -2.118,
+        -0.0
+      ],
+      [
+        0.0,
+        -2.23,
+        -0.0
+      ]
+    ]
+  },
+  "kapitel": [
+    {
+      "id": "uebersicht",
+      "titel": "Übersicht",
+      "route": "start"
+    },
+    {
+      "id": "ablauf",
+      "titel": "▶ Ablauf",
+      "route": "abspielen"
+    },
+    {
+      "id": "mund",
+      "titel": "Mund",
+      "beschriftung": true
+    },
+    {
+      "id": "speiseroehre",
+      "titel": "Speiseröhre",
+      "beschriftung": true
+    },
+    {
+      "id": "magen",
+      "titel": "Magen",
+      "beschriftung": true
+    },
+    {
+      "id": "duenndarm",
+      "titel": "Dünndarm",
+      "beschriftung": true
+    },
+    {
+      "id": "dickdarm",
+      "titel": "Dickdarm",
+      "beschriftung": true
+    },
+    {
+      "id": "enddarm",
+      "titel": "Enddarm",
+      "beschriftung": true
+    },
+    {
+      "id": "alle",
+      "titel": "Beschriftung",
+      "beschriftung": true
+    }
+  ],
+  "mesh_hotspots": [
+    {
+      "id": "mund",
+      "knoten": [
+        "mouth"
+      ],
+      "titel": "Mund / Mundhöhle",
+      "text": "Im Mund beginnt die Verdauung. Die Zähne zerkleinern die Nahrung mechanisch, der Speichel durchfeuchtet sie und macht sie gleitfähig. Das Enzym Amylase im Speichel spaltet erste Stärke schon hier in Zuckerbausteine. Die Zunge formt den zerkauten Bissen und schiebt ihn zum Schlucken nach hinten.",
+      "label": "Mundhöhle",
+      "farbe": "#ff9c6b",
+      "kapitel": "mund"
+    },
+    {
+      "id": "speiseroehre",
+      "knoten": [
+        "esophagus"
+      ],
+      "titel": "Speiseröhre",
+      "text": "Die Speiseröhre ist ein etwa 25 cm langer Muskelschlauch zwischen Rachen und Magen. Wellenförmige Muskelbewegungen, die Peristaltik, schieben den Bissen aktiv abwärts. Der Transport gelingt dadurch auch unabhängig von der Schwerkraft.",
+      "label": "Speiseröhre",
+      "farbe": "#e8b25a",
+      "kapitel": "speiseroehre"
+    },
+    {
+      "id": "magen",
+      "knoten": [
+        "stomach"
+      ],
+      "titel": "Magen",
+      "text": "Der Magen sammelt die Nahrung und durchmischt sie mit saurem Magensaft. Die Salzsäure tötet viele Keime ab, das Enzym Pepsin beginnt mit der Spaltung von Eiweißen. Portionsweise gibt der Magenpförtner den entstandenen Speisebrei an den Dünndarm weiter.",
+      "label": "Magen",
+      "farbe": "#ff7a5c",
+      "kapitel": "magen"
+    },
+    {
+      "id": "duenndarm",
+      "knoten": [
+        "small_intestine"
+      ],
+      "titel": "Dünndarm",
+      "text": "Der Dünndarm ist mit rund sechs Metern der längste Abschnitt und der Hauptort der Verdauung. Enzyme aus Bauchspeicheldrüse und Darmwand zerlegen Kohlenhydrate, Fette und Eiweiße in kleinste Bausteine. Über unzählige Zotten der Darmwand gelangen diese Nährstoffe ins Blut.",
+      "label": "Dünndarm",
+      "farbe": "#ff6f91",
+      "kapitel": "duenndarm"
+    },
+    {
+      "id": "dickdarm",
+      "knoten": [
+        "large_intestine"
+      ],
+      "titel": "Dickdarm",
+      "text": "Im Dickdarm werden dem unverdaulichen Rest Wasser und Salze entzogen, sodass der Inhalt eindickt. Zahlreiche Darmbakterien bauen Reste ab und bilden dabei einige Vitamine. Der eingedickte Stuhl wird zum Enddarm weitergeschoben.",
+      "label": "Dickdarm",
+      "farbe": "#b07ae0",
+      "kapitel": "dickdarm"
+    },
+    {
+      "id": "enddarm",
+      "knoten": [
+        "rectum"
+      ],
+      "titel": "Enddarm",
+      "text": "Der Enddarm speichert den Stuhl bis zur Ausscheidung. Ein Schließmuskel hält ihn zurück und ermöglicht die kontrollierte Entleerung über den After. Damit endet der Weg der Nahrung durch den Verdauungstrakt.",
+      "label": "Enddarm",
+      "farbe": "#6fa8d0",
+      "kapitel": "enddarm"
+    }
+  ]
+}
