@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Pilot B — Tap-Hotspots (Test)</title>
+  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/AR-js-org/AR.js@3.4.5/aframe/build/aframe-ar.js"></script>
+  <script src="./gestures.js"></script>
+  <script src="./ar-interactive.js"></script>
+  <style>
+    body { margin:0; overflow:hidden; font-family:-apple-system,system-ui,sans-serif; }
+    #hinweis { position:fixed; left:50%; bottom:22px; transform:translateX(-50%); z-index:10;
+      background:rgba(20,20,26,.82); color:#fff; padding:.6em 1em; border-radius:999px;
+      font-size:.9rem; max-width:90vw; text-align:center; pointer-events:none; }
+  </style>
+</head>
+<body>
+  <!-- PILOT B (Test-Deploy in WebAR---Beck) — inkrementelles Upgrade: ein Molekül + Tap-Hotspots.
+       Barcode-Marker 42 (Ethanol). Hotspot-Positionen sind Näherungen, am Motiv feinzujustieren. -->
+  <div id="hinweis">Kamera auf die Karte richten · Punkte antippen · 1 Finger drehen · 2 Finger zoomen</div>
+  <a-scene
+    embedded
+    tap-picker
+    gesture-detector
+    vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false"
+    renderer="colorManagement: true; physicallyCorrectLights: true; logarithmicDepthBuffer: true; antialias: true; precision: highp; sortObjects: true"
+    arjs="trackingMethod: best; sourceType: webcam; detectionMode: mono_and_matrix; matrixCodeType: 4x4_BCH_13_9_3; debugUIEnabled: false;">
+    <a-assets>
+      <a-asset-item id="m_ethanol" src="models/ethanol.glb"></a-asset-item>
+    </a-assets>
+
+    <a-marker type="barcode" value="42">
+      <a-entity class="mol-group" data-base="0.45" gesture-handler position="0 0 0.3" scale="0.45 0.45 0.45">
+        <a-gltf-model src="#m_ethanol"></a-gltf-model>
+
+        <a-entity hotspot="
+          title: Hydroxygruppe (–OH);
+          text: Die funktionelle Gruppe der Alkanole. Das Sauerstoff-Atom zieht die Bindungselektronen an sich — dadurch bildet Ethanol Wasserstoffbrücken und ist gut wasserlöslich.;
+          fact: Wusstest du? Wird die Hydroxygruppe oxidiert, entsteht aus Ethanol zunächst Ethanal und dann Ethansäure.;
+          label: –OH; color: #ff4d67" position="0.7 0.45 0"></a-entity>
+
+        <a-entity hotspot="
+          title: Ethyl-Grundgerüst (–C₂H₅);
+          text: Der unpolare Kohlenwasserstoff-Rest aus zwei C-Atomen. Er ist hydrophob — je länger dieser Rest, desto schlechter löst sich das Alkanol in Wasser.;
+          label: –C₂H₅; color: #4db6ff" position="-0.8 -0.2 0"></a-entity>
+      </a-entity>
+    </a-marker>
+
+    <a-entity camera></a-entity>
+  </a-scene>
+
+  <script>
+    var f = parseFloat(new URLSearchParams(location.search).get('s'));
+    if (f && f > 0) window.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('.mol-group').forEach(function (m) {
+        var b = parseFloat(m.getAttribute('data-base')) * f;
+        m.setAttribute('scale', b + ' ' + b + ' ' + b);
+      });
+    });
+  </script>
+</body>
+</html>
