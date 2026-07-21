@@ -93,17 +93,25 @@
   }
 
   function buildReplay(cfg) {
-    if (!cfg.animation) return;
+    // Replay gibt es für baked Clips (cfg.animation / ar-clip) UND für die
+    // Wegpunkt-Route (cfg.route / ar-route) — Sets ohne beides: kein Button.
+    var hatRoute = !!(cfg.route && cfg.route.punkte && cfg.route.punkte.length);
+    if (!cfg.animation && !hatRoute) return;
     var b = document.createElement("button");
     b.id = "ar-replay";
-    b.textContent = cfg.animation.replay_titel || "⟳ nochmal abspielen";
+    b.textContent = (cfg.animation && cfg.animation.replay_titel) ||
+      (hatRoute && cfg.route.replay_titel) || "⟳ nochmal abspielen";
+    var aktDef = null; // Kapitel-Def merken: entscheidet, was Replay abspielt
     b.addEventListener("click", function () {
-      if (window.arAnim) window.arAnim.abspielen();
+      if (aktDef && aktDef.route === "abspielen" && window.arRoute) window.arRoute.abspielen();
+      else if (window.arAnim) window.arAnim.abspielen();
     });
     document.body.appendChild(b);
     window.addEventListener("ar-chapter", function (e) {
       var def = e.detail.def;
-      b.classList.toggle("show", !!(def && def.anim === "abspielen" && window.arAnim));
+      aktDef = def;
+      b.classList.toggle("show", !!(def && ((def.anim === "abspielen" && window.arAnim) ||
+        (def.route === "abspielen" && window.arRoute))));
     });
   }
 
@@ -146,6 +154,11 @@
     gltf.setAttribute("gltf-model", "url(" + mod.src + ")");
     gltf.setAttribute("mesh-hotspots", "");
     gltf.setAttribute("ar-clip", "");
+    // Wegpunkt-Route (ar-route.js, via data-lib-extra geladen): nur wenn die
+    // Config Wegpunkte enthält — Sets ohne "route" bleiben unberührt.
+    if (cfg.route && cfg.route.punkte && cfg.route.punkte.length) {
+      gltf.setAttribute("ar-route", "");
+    }
     wrap.appendChild(gltf);
 
     (cfg.punkt_hotspots || []).forEach(function (h) {
